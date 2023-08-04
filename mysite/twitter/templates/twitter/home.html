@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+
+<html>
+    <head>
+        <title>Twitter Home</title>
+        <meta charset = "utf-8"> 
+        {% load static %}
+        <link rel = "stylesheet" href = "{% static 'twitter/css/home.css' %}">
+        <script src = "{% static 'twitter/js/home.js'%}"></script> 
+    </head>
+    <body>
+        <h1> Twitter Home </h1>
+        <p>See the latest tweets</p>
+        {% if post_list %}
+            {% for post in post_list %}
+                <li>{{post.user}} - {{post.text}}</li>
+            {% endfor %}
+        {% else %}
+            <li>No Posts Currently</li>
+        {% endif %}
+    </body>
+</html>
