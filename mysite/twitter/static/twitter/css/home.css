@@ -13,3 +13,55 @@ li{
     color:white;
     font-family:'Courier New', Courier, monospace;
 }
+.sidegrid{
+    position:relative; 
+    display:grid; 
+    grid-template-columns: 50%; 
+    justify-content:right; 
+}
+.sidebar{
+    position: fixed; 
+    width: 20%; 
+    height:100%;
+    padding:0.5px;
+    background-color:black;
+    border-right:1px solid;
+    border-color:darkslategray;
+    padding-top:10px;
+}   
+.sidebar button{
+    display:block;
+    position:relative;
+    border-radius: 20px; 
+    float:right; 
+    padding:10px; 
+    margin:5px; 
+    border:none; 
+    background-color:black;
+    color:white; 
+    font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif; 
+}
+.sidebar button:hover{
+    color:black;
+    background-color: white; 
+}
+.postbox{
+    width:60%; 
+    border-right: 1px solid; 
+    margin-left:22%; 
+    padding-top:15px; 
+}
+.post{
+    border-radius: 10px; 
+    padding:15px; 
+    margin:5px; 
+    color:white; 
+    background-color:rgb(54, 46, 108); 
+}
+*{
+    margin: 0; 
+    padding: 0;
+} 
+a {
+    text-decoration:none; 
+}
