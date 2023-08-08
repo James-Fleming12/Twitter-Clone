@@ -58,10 +58,27 @@ li{
     color:white; 
     background-color:rgb(54, 46, 108); 
 }
+.posttext{
+    font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+}
+.post h2{
+    font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    display:inline; 
+    margin-left:5px;
+}
+.post span{
+    font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    margin-top:10px;
+    display:block;
+}
 *{
     margin: 0; 
     padding: 0;
 } 
 a {
     text-decoration:none; 
+    color:white;
+}
+a:onclick{
+    color:white; 
 }
