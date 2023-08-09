@@ -1,9 +1,12 @@
-from django.shortcuts import render, get_object_or_404
+from django.shortcuts import redirect, render, get_object_or_404
 from django.http import HttpResponse, Http404
 from .models import *
 from django.template import loader
 from django.utils import timezone
 from django.views import generic
+from django.contrib.auth.models import User
+from django.contrib.auth import authenticate, login
+from django.contrib import messages
 
 class HomeView(generic.ListView):
     template_name = "twitter/home.html"
@@ -11,9 +14,18 @@ class HomeView(generic.ListView):
     def get_queryset(self):
         """Return the last five published questions."""
         return Post.objects.filter(pub_date__lte=timezone.now()).order_by("-pub_date")[:5]
+    
+def HomeView(request):
+    if(request.user.is_authenticated == False):
+        redirect('login')
+    else:
+        post_list = Post.objects.order_by("-pub_date")[:50]
+        context = {"post_list": post_list}
+        return render(request, "twitter/home.html", context)
+
 
 def ProfileView(request, username):
-    tempUser = get_object_or_404(User, username=username)
+    tempUser = get_object_or_404(User2, username=username)
     # post_list = loader(tempUser.post.objects.order_by("pub-date")[:5])
     post_list = Post.objects.filter(user = tempUser)
     context = {"post_list": post_list}
@@ -22,7 +34,54 @@ def ProfileView(request, username):
 def PostView(request, pk):
     tempPost = get_object_or_404(Post, pk=pk)
     context = {"post": tempPost}
+
+    if request.method == "POST":
+        user = request.user 
+        text = request.POST['comment']
+
     return render(request, 'twitter/post.html', context)
 
+def LogIn(request):
+    if request.method == "POST":
+        # username = request.POST.get("username")
+        username = request.POST['username']
+        password = request.POST['password']
+        user = authenticate(username=username, password=password)
+        if user is not None:
+            login(request, user)
+            return redirect('home')
+        else:
+            messages.error(request, "Wrong Login Details")
+            return redirect('login')
+    return render(request, 'twitter/login.html')
+
+def SignUp(request):
+    if request.method == "POST":
+        # username = request.POST.get("username")
+        username = request.POST['username']
+        password = request.POST['password1']
+        password2 = request.POST['password2']
+        if password == password2:
+            found = False
+            users = User2.objects
+            for x in users:
+                if x.username == username:
+                    found = True
+            if found == False: 
+                myuser = User.objects.create_user(username=username, password=password)
+                myuser.save()
+                myuser2 = User2.objects.create(username=username, password=password)
+                myuser2.save()
+                return redirect(LogIn)
+            else:
+                messages.error(request, "Username already in use")
+                return redirect('signup')
+        else:
+            messages.error(request, "Passwords Don't Match") 
+            return redirect('signup')
+    return render(request, 'twitter/signup.html')
+
+def SignOut(request):
+    pass
 # def home(request):
 #     return HttpResponse("Hello World, You're at the main screen")

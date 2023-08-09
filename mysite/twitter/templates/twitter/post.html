@@ -9,8 +9,21 @@
     <script src = "{% static 'twitter/js/post.js'%}"></script> 
 </head>
 <body>
-    <div class="navbar"></div> 
+    <div class="navbar">
+        <a href = "{% url 'home' %}"><div class = "homebutton"> Home </div></a>
+    </div> 
     {% if post %}
-        
+        <div class="post">
+            <img src = "{% static 'twitter/images/default.png' %}", width = 60px, height = 60px> 
+            <h2>{{post.user2}}</h2> <br>
+            <span>{{post.text}}</span> 
+        </div>
+        <form action = "/twitter/post/{{post.pk}}" method = "post" class = "commentsub">
+            {%csrf_token%}
+            <input type = "text" id = "comment" name = "comment" placeholder = "Comment...">
+        </form>
+    {% else %}
+        <p>No Post Available</p>
+    {% endif %}
 </body>
 </html>
