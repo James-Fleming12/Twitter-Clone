@@ -28,22 +28,23 @@ li{
     border-right:1px solid;
     border-color:darkslategray;
     padding-top:10px;
-}   
-.sidebar button{
+}
+.sidebar a{
     display:block;
     position:relative;
-    border-radius: 20px; 
-    float:right; 
+    border-radius: 10px; 
+    height:15px;
+    margin:2px;
+    margin-right:5px;
     padding:10px; 
-    margin:5px; 
     border:none; 
     background-color:black;
     color:white; 
-    font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif; 
+    font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
 }
-.sidebar button:hover{
+.sidebar a:hover{
+    background-color:white;
     color:black;
-    background-color: white; 
 }
 .postbox{
     width:60%; 
@@ -60,6 +61,7 @@ li{
 }
 .posttext{
     font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    overflow:auto;
 }
 .post h2{
     font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;

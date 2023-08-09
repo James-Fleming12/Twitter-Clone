@@ -11,14 +11,14 @@
     <body>
         <div class = "sidebar">
             <div class = "sidegrid">
-                <button href = "#"> Home </button>
-                <button href = "#"> Explore </button>
-                <button href = "#"> Notifications </button>
-                <button href = "#"> Messages </button>
-                <button href = "#"> Bookmarks </button>
-                <button href = "#"> Lists </button>
-                <button href = "#"> Profile </button>
-                <button href = "{% url 'signout' %}"> Sign Out </button>
+                <a href = "#"> Home </a>
+                <a href = "#"> Explore </a>
+                <a href = "#"> Notifications </a>
+                <a href = "#"> Messages </a>
+                <a href = "#"> Bookmarks </a>
+                <a href = "#"> Lists </a>
+                <a href = "/twitter/user/{{user.username}}"> Profile </a>
+                <a href = "{% url 'signout' %}"> Sign Out </a>
             </div>
         </div> 
         <div class = "postbox">
@@ -28,7 +28,9 @@
                         {% load static %}
                         <img src = "{% static 'twitter/images/default.png' %}", width = 30px, height = 30px> 
                         <a href = "{% url 'profile' username=post.user %}"><h2>{{post.user}}</h2></a> <br>
-                        <span>{{post.text}}</span> 
+                        <a href = "{% url 'post' pk=post.pk%}"> 
+                            <span>{{post.text}}</span> 
+                        </a>
                     </div>
                 {% endfor %}
             {% else %}

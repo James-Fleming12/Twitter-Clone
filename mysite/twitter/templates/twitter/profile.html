@@ -14,6 +14,11 @@
             Home
         </div></a>
     </div> 
+    {% if post_list %}
+        <h2>{{ post_list.0.user }}'s Posts</h2>
+    {% else %}
+        <h2>No posts available for this user</h2>
+    {% endif %}
     <div class = "postbox">
         {% if post_list %}
             {% for post in post_list %}
@@ -21,7 +26,7 @@
                     {% load static %}
                     <img src = "{% static 'twitter/images/default.png' %}", width = 30px, height = 30px> 
                     <h2>{{post.user}}</h2> <br>
-                    <span>{{post.text}}</span> 
+                    <a href = "{% url 'post' pk=post.pk %}"><span>{{post.text}}</span></a>
                 </div>
             {% endfor %}
         {% else %}

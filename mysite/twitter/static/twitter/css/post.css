@@ -24,7 +24,7 @@
     margin:20px;
     margin-top: 70px;
     border-radius: 30px; 
-    height:200px;
+    height:auto;
     color:white; 
     background-color:rgb(54, 46, 108); 
 }
@@ -33,6 +33,7 @@
     font-size:20px; 
     margin:10px;
     display:block;
+    overflow:auto;
 }
 .post h2{
     font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
@@ -41,6 +42,9 @@
     bottom:10px;
     position:relative;
 }
+h2{
+    color:white;
+}
 .commentsub{
     border-radius:10px; 
     background-color:black; 
@@ -48,16 +52,68 @@
     border: solid 1px; 
     border-color:lightgray;
     padding:5px; 
+    margin:25px;
+    margin-top:0;
+    width:auto;
 }
 .commentsub input{
     background-color:transparent;
     color:inherit;
+    outline:none;
+    width:100%;
+}
+.commentsub span{
+    width:calc(100% - 60px);
+}
+.subbutton{
+    float:right;
+    width:50px; 
+    background-color:rgb(68, 68, 255); 
+    color:white;
+    margin:1px;
+    border-radius:3px;
+    border:none;
+    font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    height:15px;
+}
+.idk{
+    display:block;
+}
+.commentsub input:focus{
+    outline:none;
+}
+.commentsub input:onclick{
+    animation:none;
 }
 a{
     text-decoration:none; 
 }
 a:onclick{
     color:inherit; 
+}
+
+.comment{
+    border-radius:5px; 
+    background-color:rgb(54, 46, 108); 
+    width:80%;
+    height:auto;
+    margin:10px;
+    margin-left:auto; margin-right:auto;
+    padding:10px;
+}
+
+.commenttext{
+    overflow:auto; 
+    font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    font-size:20px;
+    color:white;
+}
+a{
+    color:white; 
+    text-decoration:none;
+}
+a:onclick{
+    color:white;
 }
 *{
     margin:0;

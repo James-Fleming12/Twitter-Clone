@@ -16,20 +16,22 @@ class Post(models.Model):
     text = models.CharField(max_length=200)
     pub_date = models.DateTimeField("date published")
     user = models.ForeignKey(User2, on_delete=models.PROTECT)
-    likes = models.IntegerField() 
+    likes = models.IntegerField(default = 0) 
     def __str__(self):
         return str(self.user) + " - " + self.text
+    def getComments(self):
+        return Comment.objects.filter(post = self)
     
 class Comment(models.Model):
     text = models.CharField(max_length = 200)
     pub_date = models.DateTimeField("date published")
     user = models.ForeignKey(User2, on_delete=models.CASCADE)
-    likes = models.IntegerField()
+    likes = models.IntegerField(default = 0)
     post = models.ForeignKey(Post, on_delete=models.CASCADE)
 
 class CommentUnderComment(models.Model):
     text = models.CharField(max_length = 200)
     pub_date = models.DateTimeField("date published")
     user = models.ForeignKey(User2, on_delete = models.CASCADE)
-    likes = models.IntegerField()
+    likes = models.IntegerField(default = 0)
     post = models.ForeignKey(Comment, on_delete=models.CASCADE)

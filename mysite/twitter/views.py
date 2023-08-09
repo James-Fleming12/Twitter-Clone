@@ -5,7 +5,7 @@ from django.template import loader
 from django.utils import timezone
 from django.views import generic
 from django.contrib.auth.models import User
-from django.contrib.auth import authenticate, login
+from django.contrib.auth import authenticate, login, logout
 from django.contrib import messages
 
 class HomeView(generic.ListView):
@@ -17,28 +17,28 @@ class HomeView(generic.ListView):
     
 def HomeView(request):
     if(request.user.is_authenticated == False):
-        redirect('login')
+        return redirect('login')
     else:
         post_list = Post.objects.order_by("-pub_date")[:50]
         context = {"post_list": post_list}
         return render(request, "twitter/home.html", context)
 
-
 def ProfileView(request, username):
     tempUser = get_object_or_404(User2, username=username)
     # post_list = loader(tempUser.post.objects.order_by("pub-date")[:5])
-    post_list = Post.objects.filter(user = tempUser)
+    post_list = Post.objects.filter(user = tempUser).order_by("-pub_date")
     context = {"post_list": post_list}
     return render(request, "twitter/profile.html", context)
 
 def PostView(request, pk):
     tempPost = get_object_or_404(Post, pk=pk)
     context = {"post": tempPost}
-
     if request.method == "POST":
-        user = request.user 
+        user2 = User2.objects.filter(username = request.user.username)
         text = request.POST['comment']
-
+        tempComment = Comment.objects.create(text = text, user = user2[0], pub_date = timezone.now(), post = Post.objects.get(pk=pk))
+        tempComment.save() 
+        return redirect('post', pk = pk)
     return render(request, 'twitter/post.html', context)
 
 def LogIn(request):
@@ -82,6 +82,8 @@ def SignUp(request):
     return render(request, 'twitter/signup.html')
 
 def SignOut(request):
-    pass
+    logout(request)
+    messages.success(request, "Logged Out Successfully")
+    return redirect('login')
 # def home(request):
 #     return HttpResponse("Hello World, You're at the main screen")

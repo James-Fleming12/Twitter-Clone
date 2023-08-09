@@ -1,16 +1,25 @@
+h2{
+    color:white;
+    margin:25px;
+    margin-top:70px;
+    margin-bottom:10px;
+}
 .post{
     border-radius: 10px; 
     padding:15px; 
-    margin:20px; 
+    margin:20px;
+    margin-bottom:10px;
+    margin-top:10px; 
     margin-bottom:5px;
     color:white; 
     background-color:rgb(54, 46, 108); 
 }
 .postbox{
-    margin-top:70px;
+    margin-top:5px;
 }
 .posttext{
     font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    overflow:auto;
 }
 body{
     background-color:black; 
@@ -52,4 +61,8 @@ body{
 }
 a{
     text-decoration:none; 
+    color:white; 
+}
+a:onclick{
+    color:white;
 }
