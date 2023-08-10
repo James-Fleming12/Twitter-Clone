@@ -99,7 +99,7 @@ def SignUp(request):
         password2 = request.POST['password2']
         if password == password2:
             found = False
-            users = User2.objects
+            users = User2.objects.all()
             for x in users:
                 if x.username == username:
                     found = True
