@@ -42,6 +42,9 @@
     bottom:10px;
     position:relative;
 }
+.post a{
+    position:inline;
+}
 h2{
     color:white;
 }
@@ -122,4 +125,49 @@ a:onclick{
 body{
     background-color:black;
     padding:0.1px; 
+}
+.poststats{
+    border:solid 1px; 
+    color:white;
+    border-color:white;
+    border-radius:3px; 
+    font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    font-size:10px; 
+    display:inline-block; 
+    padding:5px;
+    margin:5px;
+    margin-left:10px;
+    margin-bottom:0;
+    background-color:transparent; 
+}
+.poststatsliked{
+    border:solid 1px; 
+    color:lightskyblue;
+    border-color:lightskyblue;
+    border-radius:3px; 
+    font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    font-size:10px; 
+    display:inline-block; 
+    padding:5px;
+    margin:5px;
+    margin-left:10px;
+    margin-bottom:0;
+    background-color:rgb(12, 21, 21);
+}
+.delbutton{
+    border:solid 1px;
+    color:red; 
+    border-color:red; 
+    font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    font-size:10px; 
+    border-radius:1px;
+    margin-left:10px;
+    display:inline;
+    background-color:transparent; 
+    padding:5px;
+    bottom:20px;
+    position:relative;
+}
+.inline{
+    display:inline;
 }

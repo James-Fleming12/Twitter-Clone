@@ -1,0 +1,5 @@
+add Comment screens 
+add CommentUnderComment screens
+add following accounts page
+add bookmarks
+add notifications page for new follows and new comments

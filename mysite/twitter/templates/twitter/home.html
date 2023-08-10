@@ -9,10 +9,20 @@
         <script src = "{% static 'twitter/js/home.js'%}"></script> 
     </head>
     <body>
+        <div class = "popup" id = "popup">
+            <button class = "inputclose" onclick="popup()">X</button>
+            <h2>Create A Post</h2>
+            <form action = "{% url 'createpost' %}" method = "POST">
+                {% csrf_token %}
+                <input class = "inputbox" type = "text" placeholder = "Insert Post..." name = "text" id = "text">
+                <br>
+                <button class = "inputbutton" type = "submit">Submit</button> 
+            </form>
+        </div>
         <div class = "sidebar">
             <div class = "sidegrid">
-                <a href = "#"> Home </a>
-                <a href = "#"> Explore </a>
+                <a href = "{% url 'home' %}"> Home </a>
+                <a href = "#"> Following </a>
                 <a href = "#"> Notifications </a>
                 <a href = "#"> Messages </a>
                 <a href = "#"> Bookmarks </a>
@@ -22,12 +32,14 @@
             </div>
         </div> 
         <div class = "postbox">
+            <button onclick = "popup()" class = "postbutton">Create Post</button>
             {% if post_list %}
                 {% for post in post_list %}
                     <div class = "post">
                         {% load static %}
                         <img src = "{% static 'twitter/images/default.png' %}", width = 30px, height = 30px> 
-                        <a href = "{% url 'profile' username=post.user %}"><h2>{{post.user}}</h2></a> <br>
+                        <a href = "{% url 'profile' username=post.user %}"><h2>{{post.user}}</h2></a> 
+                        <p class = "poststats">Likes - {{post.likes}} | Comments - {{post.commentsCount}}</p> <br>
                         <a href = "{% url 'post' pk=post.pk%}"> 
                             <span>{{post.text}}</span> 
                         </a>

@@ -1,3 +1,43 @@
+.postbutton{
+    display:block;
+    width:98.5%;
+    border: solid 1px;
+    border-radius: 10px; 
+    border-color:rgb(76, 65, 151);
+    color: rgb(76, 65, 151);
+    padding:15px;
+    background-color:transparent; 
+    margin:5px;
+}
+.inputbox{
+    margin:10px;
+    width:260px;
+    height:200px;
+    border-radius: 10px;
+    color:white;
+    border: solid 1px white;
+    background-color:transparent;
+    padding:15px;
+}
+.inputclose{
+    position:absolute;
+    border:none;
+    color:white;
+    right:20px;
+    top:20px;
+    background-color:transparent;
+}
+.inputbox:focus{
+    outline:none;
+}
+.inputbutton{
+    float:bottom; 
+    border: solid 1px white;
+    color:white;
+    border-radius:10px;
+    background-color:transparent;
+    padding:5px;
+}
 h1{
     color:white; 
     font-family:'Courier New', Courier, monospace;
@@ -63,6 +103,13 @@ li{
     font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
     overflow:auto;
 }
+.poststats{
+    font-size:15px; 
+    font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    color:white;
+    display:inline;
+    margin-left:15px; 
+}
 .post h2{
     font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
     display:inline; 
@@ -83,4 +130,31 @@ a {
 }
 a:onclick{
     color:white; 
+}
+.popup{
+    visibility:hidden; 
+    position:absolute;
+    background-color:rgb(54, 46, 108); 
+    color:white;
+    width:340px;
+    height:300px;
+    border-radius:30px;
+    left: calc(50% - 162px);
+    bottom: calc(50% - 162px);
+    text-align:center;
+    padding:30px;
+    padding-left:10px; padding-right:10px;
+    border: solid 2px;
+    border-color:darkslateblue;
+}
+.show{
+    animation: fadeIn 1s; 
+    -webkit-animation: fadeIn 1s;
+    -moz-animation: fadeIn 1s; 
+    -o-animation: fadeIn 1s;
+    visibility:visible; 
+}
+@keyframes fadeIn{
+    from {opacity: 0%}
+    to {opacity: 100%}
 }

@@ -15,8 +15,27 @@
     {% if post %}
         <div class="post">
             <img src = "{% static 'twitter/images/default.png' %}", width = 60px, height = 60px> 
-            <a href = "{% url 'profile' username=post.user %}"><h2>{{post.user}}</h2></a> <br>
+            <a href = "{% url 'profile' username=post.user %}"><h2>{{post.user}}</h2></a> 
+            {% if own %}
+                <form class = "inline" action="{% url 'deletepost' pk=post.pk%}" method="POST">
+                    {% csrf_token %}
+                    <button class = "delbutton" type="submit">Delete</button> 
+                </form> 
+            {% endif %}
+            <br>
             <span>{{post.text}}</span> 
+            <form action="{% url 'likepost' pk=post.pk %}" method="POST">
+                {% csrf_token %}
+                {% if liked %}
+                    <button type="submit" class = "poststatsliked">
+                        Likes - {{post.likes}}
+                    </button>
+                {% else %}
+                    <button type="submit" class = "poststats">
+                        Likes - {{post.likes}}
+                    </button>
+                {% endif %}
+            </form>
         </div>
         <form action = "/twitter/post/{{post.pk}}" method = "post" class = "commentsub">
             {%csrf_token%}

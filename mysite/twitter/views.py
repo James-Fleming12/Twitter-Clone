@@ -1,6 +1,8 @@
 from django.shortcuts import redirect, render, get_object_or_404
-from django.http import HttpResponse, Http404
+from django.http import HttpResponse, Http404, HttpResponseRedirect
+from django.urls import reverse
 from .models import *
+from django.db.models import F
 from django.template import loader
 from django.utils import timezone
 from django.views import generic
@@ -32,15 +34,49 @@ def ProfileView(request, username):
 
 def PostView(request, pk):
     tempPost = get_object_or_404(Post, pk=pk)
-    context = {"post": tempPost}
+    user = get_object_or_404(User2, username=request.user.username)
+    liked = False
+    own = False
+    if tempPost.likedBy.filter(username=user.username).exists():
+        liked = True
+    if tempPost.user.username == user.username:
+        own = True
     if request.method == "POST":
-        user2 = User2.objects.filter(username = request.user.username)
-        text = request.POST['comment']
-        tempComment = Comment.objects.create(text = text, user = user2[0], pub_date = timezone.now(), post = Post.objects.get(pk=pk))
-        tempComment.save() 
-        return redirect('post', pk = pk)
+        if request.POST['comment'] != "": 
+            user2 = User2.objects.filter(username = request.user.username)
+            text = request.POST['comment']
+            tempComment = Comment.objects.create(text = text, user = user2[0], pub_date = timezone.now(), post = Post.objects.get(pk=pk))
+            tempComment.save() 
+            tempPost.commentsCount += 1
+            tempPost.save()
+            return redirect('post', pk = pk)
+    context = {"post": tempPost, "liked": liked, "own": own}
     return render(request, 'twitter/post.html', context)
 
+def PostLike(request, pk):
+    user = get_object_or_404(User2, username=request.user.username)
+    post = get_object_or_404(Post, pk=pk)
+    if post.likedBy.filter(username=user.username).exists():
+        post.likedBy.remove(user)
+        post.likes = post.likes-1 
+    else: 
+        post.likedBy.add(user)
+        post.likes = post.likes+1 
+    post.save()
+    return HttpResponseRedirect(reverse('post', args=[str(pk)]))
+
+def DeletePost(request, pk):
+    post = get_object_or_404(Post, pk=pk)
+    post.delete() 
+    return HttpResponseRedirect(reverse('home'))
+
+def CreatePost(request):
+    user = get_object_or_404(User2, username=request.user.username)
+    text = request.POST['text']
+    newpost = Post.objects.create(user=user, text=text, pub_date=timezone.now())
+    newpost.save()
+    return HttpResponseRedirect(reverse('home'))
+    
 def LogIn(request):
     if request.method == "POST":
         # username = request.POST.get("username")
