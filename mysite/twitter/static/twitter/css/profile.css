@@ -10,6 +10,7 @@ form{
 }
 .followbutton{
     padding: 2px; 
+    font-size:15px;
     border-radius:5px;
     color:yellow;
     border: solid 1px yellow; 
@@ -18,6 +19,7 @@ form{
 }
 .followedbutton{
     padding: 2px; 
+    font-size:15px;
     border-radius:5px;
     color:green;
     border: solid 1px green; 
