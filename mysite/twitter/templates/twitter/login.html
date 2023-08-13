@@ -9,7 +9,7 @@
     <script src = "{% static 'twitter/js/login.js'%}"></script> 
 </head>
 <body>
-    <form action = "/twitter/login" method = "post" class = "logbox">
+    <form action = "/twitter/login" method = "post" class = "logbox" autocomplete="off">
         {%csrf_token%}
         <h3>Sign-In</h3>
         <input class = "logentry" type="text" id = "username" name = "username"  placeholder = "Enter Username...">

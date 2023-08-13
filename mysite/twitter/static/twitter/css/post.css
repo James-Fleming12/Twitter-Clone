@@ -104,7 +104,11 @@ a:onclick{
     margin-left:auto; margin-right:auto;
     padding:10px;
 }
-
+.commenttexttext{
+    outline:none;
+    border:none;
+    box-shadow:none;
+}
 .commenttext{
     overflow:auto; 
     font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;

@@ -11,4 +11,5 @@ urlpatterns = [
     path("like/<int:pk>", views.PostLike, name="likepost"),
     path("delete/<int:pk>", views.DeletePost, name="deletepost"),
     path("create", views.CreatePost, name="createpost"),
+    path("follow/<str:username>", views.Follow, name="follow")
 ]

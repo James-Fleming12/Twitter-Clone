@@ -27,10 +27,18 @@ def HomeView(request):
 
 def ProfileView(request, username):
     tempUser = get_object_or_404(User2, username=username)
+    currUser = get_object_or_404(User2, username=request.user.username)
+    followed = False
+    tempFollow = get_object_or_404(FollowObj, username=username)
+    if currUser.following.filter(username=username).exists():
+        followed = True 
     # post_list = loader(tempUser.post.objects.order_by("pub-date")[:5])
     post_list = Post.objects.filter(user = tempUser).order_by("-pub_date")
-    context = {"post_list": post_list}
+    context = {"post_list": post_list, "username": username, "followed": followed}
     return render(request, "twitter/profile.html", context)
+
+def FollowingView(request): # show all accounts that you follow and another page that shows all posts by accounts you follow toggleable by a button
+    tempUser = get_object_or_404(User2, username=request.user.username)
 
 def PostView(request, pk):
     tempPost = get_object_or_404(Post, pk=pk)
@@ -76,7 +84,17 @@ def CreatePost(request):
     newpost = Post.objects.create(user=user, text=text, pub_date=timezone.now())
     newpost.save()
     return HttpResponseRedirect(reverse('home'))
-    
+
+def Follow(request, username):
+    user = get_object_or_404(User2, username=request.user.username)
+    user2 = get_object_or_404(User2, username=username)
+    if user.following.filter(username=user2.username).exists():
+        user.following.remove(FollowObj.objects.get(username=username))
+    else:
+        user.following.add(FollowObj.objects.get(username=username))
+    user.save()
+    return HttpResponseRedirect(reverse('profile', args=[str(username)]))
+
 def LogIn(request):
     if request.method == "POST":
         # username = request.POST.get("username")
@@ -108,6 +126,8 @@ def SignUp(request):
                 myuser.save()
                 myuser2 = User2.objects.create(username=username, password=password)
                 myuser2.save()
+                myfollow = Follow.objects.create(username=username)
+                myfollow.save()
                 return redirect(LogIn)
             else:
                 messages.error(request, "Username already in use")

@@ -3,6 +3,26 @@ h2{
     margin:25px;
     margin-top:70px;
     margin-bottom:10px;
+    display:inline-block;
+}
+form{
+    display:inline-block;
+}
+.followbutton{
+    padding: 2px; 
+    border-radius:5px;
+    color:yellow;
+    border: solid 1px yellow; 
+    background-color:transparent;
+    font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+}
+.followedbutton{
+    padding: 2px; 
+    border-radius:5px;
+    color:green;
+    border: solid 1px green; 
+    background-color:lightgreen;
+    font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
 }
 .post{
     border-radius: 10px; 

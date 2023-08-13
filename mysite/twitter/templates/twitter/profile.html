@@ -14,11 +14,15 @@
             Home
         </div></a>
     </div> 
-    {% if post_list %}
-        <h2>{{ post_list.0.user }}'s Posts</h2>
-    {% else %}
-        <h2>No posts available for this user</h2>
-    {% endif %}
+    <h2>{{ username }}'s Posts</h2>
+    <form action="/twitter/follow/{{username}}" method = "POST"> 
+        {% csrf_token %}
+        {% if followed %}
+            <button class = "followedbutton" type = "submit">Follow</button>
+        {% else %}
+            <button class = "followbutton" type = "submit">Follow</button>
+        {% endif %}
+    </form>
     <div class = "postbox">
         {% if post_list %}
             {% for post in post_list %}
