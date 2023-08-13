@@ -10,13 +10,13 @@
     </head>
     <body>
         <div class = "popup" id = "popup">
-            <button class = "inputclose" onclick="popup()">X</button>
+            <button class = "inputclose pointer" onclick="popup()">X</button>
             <h2>Create A Post</h2>
             <form action = "{% url 'createpost' %}" method = "POST">
                 {% csrf_token %}
-                <input class = "inputbox" type = "text" placeholder = "Insert Post..." name = "text" id = "text">
+                <input class = "inputbox" type = "text" placeholder = "Insert Post..." name = "text" id = "text" autocomplete="off">
                 <br>
-                <button class = "inputbutton" type = "submit">Submit</button> 
+                <button class = "inputbutton pointer" type = "submit">Submit</button> 
             </form>
         </div>
         <div class = "sidebar">
@@ -32,12 +32,12 @@
             </div>
         </div> 
         <div class = "postbox">
-            <button onclick = "popup()" class = "postbutton">Create Post</button>
+            <button onclick = "popup()" class = "postbutton pointer">Create Post</button>
             {% if post_list %}
                 {% for post in post_list %}
                     <div class = "post">
                         {% load static %}
-                        <img src = "{% static 'twitter/images/default.png' %}", width = 30px, height = 30px> 
+                        <img src = "{% static 'twitter/images/default.png' %}", width = 30px, height = 30px/>
                         <a href = "{% url 'profile' username=post.user %}"><h2>{{post.user}}</h2></a> 
                         <p class = "poststats">Likes - {{post.likes}} | Comments - {{post.commentsCount}}</p> <br>
                         <a href = "{% url 'post' pk=post.pk%}"> 

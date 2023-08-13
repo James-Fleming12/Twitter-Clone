@@ -9,6 +9,9 @@
     background-color:transparent; 
     margin:5px;
 }
+.pointer{
+    cursor:pointer; 
+}
 .inputbox{
     margin:10px;
     width:260px;

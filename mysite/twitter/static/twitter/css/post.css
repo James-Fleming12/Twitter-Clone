@@ -111,6 +111,11 @@ a:onclick{
     font-size:20px;
     color:white;
 }
+.commenttextbox{
+    border: none;
+    box-shadow:none;
+    outline:none;
+}
 a{
     color:white; 
     text-decoration:none;
@@ -139,6 +144,7 @@ body{
     margin-left:10px;
     margin-bottom:0;
     background-color:transparent; 
+    cursor: pointer; 
 }
 .poststatsliked{
     border:solid 1px; 
@@ -153,6 +159,7 @@ body{
     margin-left:10px;
     margin-bottom:0;
     background-color:rgb(12, 21, 21);
+    cursor: pointer; 
 }
 .delbutton{
     border:solid 1px;

@@ -24,7 +24,7 @@
             {% for post in post_list %}
                 <div class = "post">
                     {% load static %}
-                    <img src = "{% static 'twitter/images/default.png' %}", width = 30px, height = 30px> 
+                    <img src = "{% static 'twitter/images/default.png' %}", width = 30px, height = 30px>
                     <h2>{{post.user}}</h2> <br>
                     <a href = "{% url 'post' pk=post.pk %}"><span>{{post.text}}</span></a>
                 </div>

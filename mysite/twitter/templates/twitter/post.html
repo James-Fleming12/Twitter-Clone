@@ -40,7 +40,7 @@
         <form action = "/twitter/post/{{post.pk}}" method = "post" class = "commentsub">
             {%csrf_token%}
             <button class = "subbutton" type="submit">Submit</button>
-            <span class = "idk"><input type = "text" id = "comment" name = "comment" placeholder = "Comment..."></span>
+            <span class = "idk"><input type = "text" class = "pointer" id = "comment" name = "comment" placeholder = "Comment..." autocomplete="off"></span>
         </form>
         {% for x in post.getComments %}
             <div class = "comment">
