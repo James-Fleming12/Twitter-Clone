@@ -83,6 +83,10 @@ def CommentView(request, pk):
     context = {"comment": tempComment, "liked": liked, "own": own, "postliked": postLiked}
     return render(request, 'twitter/comment.html', context)
 
+def CommentUnderView(request, pk):
+    tempComment = get_object_or_404(CommentUnderComment, pk=pk)
+    user = get_object_or_404(User2, username = request.user.username)
+
 def PostLike(request, pk):
     user = get_object_or_404(User2, username=request.user.username)
     post = get_object_or_404(Post, pk=pk)
