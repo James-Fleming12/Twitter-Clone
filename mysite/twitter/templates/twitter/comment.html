@@ -16,7 +16,7 @@
             <img src = "{% static 'twitter/images/default.png' %}", width = 60px, height = 60px> 
             <a href = "{% url 'profile' username=comment.post.user %}"><h2>{{comment.post.user}}</h2></a> 
             <br>
-            <span>{{comment.post.text}}</span> 
+            <a href = "{% url 'post' pk=comment.post.pk %}" ><span>{{comment.post.text}}</span></a>
             <form action="{% url 'likepost' pk=comment.post.pk %}" method="POST">
                 {% csrf_token %}
                 {% if postliked %}
