@@ -1,6 +1,5 @@
-add Comment screens (with delete buttons)
 add CommentUnderComment screens (with delete buttons)
 add following accounts page (two seperate toggles for accounts or posts of followed accounts)
 add bookmarks (replaces delete button on posts that aren't owned)
 add notifications page for new follows and new comments 
-add lists of posts (different model that people users can add posts to like bookmarks)x
+add lists of posts (different model that people users can add posts to like bookmarks)
