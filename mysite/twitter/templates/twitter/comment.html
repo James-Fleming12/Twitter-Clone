@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    {% load static %}
+    <link rel = "stylesheet" href = "{% static 'twitter/css/comment.css' %}">
+</head>
+<body>
+    <div class="navbar">
+        <a href = "{% url 'home' %}"><div class = "homebutton"> Home </div></a>
+    </div> 
+    {% if comment %}
+        <div class="post">
+            <img src = "{% static 'twitter/images/default.png' %}", width = 60px, height = 60px> 
+            <a href = "{% url 'profile' username=comment.post.user %}"><h2>{{comment.post.user}}</h2></a> 
+            <br>
+            <span>{{comment.post.text}}</span> 
+            <form action="{% url 'likepost' pk=comment.post.pk %}" method="POST">
+                {% csrf_token %}
+                {% if postliked %}
+                    <button type="submit" class = "commentstatsliked">
+                        Likes - {{comment.post.likes}}
+                    </button>
+                {% else %}
+                    <button type="submit" class = "commentstats">
+                        Likes - {{comment.post.likes}}
+                    </button>
+                {% endif %}
+            </form>
+        </div>
+        <center><hr></center>
+        <div class="post differentmargin">
+            <img src = "{% static 'twitter/images/default.png' %}", width = 60px, height = 60px> 
+            <a href = "{% url 'profile' username=comment.user %}"><h2>{{comment.user}}</h2></a> 
+            {% if own %}
+                <form class = "inline" action="{% url 'deletecomment' pk=comment.pk%}" method="POST">
+                    {% csrf_token %}
+                    <button class = "delbutton" type="submit">Delete</button> 
+                </form> 
+            {% endif %}
+            <br>
+            <span>{{comment.text}}</span> 
+            <form action="{% url 'likecomment' pk=comment.pk %}" method="POST">
+                {% csrf_token %}
+                {% if liked %}
+                    <button type="submit" class = "commentstatsliked">
+                        Likes - {{comment.likes}}
+                    </button>
+                {% else %}
+                    <button type="submit" class = "commentstats">
+                        Likes - {{comment.likes}}
+                    </button>
+                {% endif %}
+            </form>
+        </div>
+        <form action = "/twitter/comment/{{comment.pk}}" method = "post" class = "commentsub">
+            {%csrf_token%}
+            <button class = "subbutton" type="submit">Submit</button>
+            <span class = "idk"><input type = "text" class = "commenttexttext" id = "comment" name = "comment" placeholder = "Comment..." autocomplete="off"></span>
+        </form>
+        {% for x in comment.getCommentsFix %}
+            <div class = "comment">
+                <span class = "commenttext">
+                    <a href = "{% url 'profile' username=x.user %}">{{x.user}}</a> - {{x.text}} 
+                </span>
+            </div>
+        {% endfor %}
+    {% else %}
+        <p>No Comment Available</p>
+    {% endif %}
+</body>
+</html>

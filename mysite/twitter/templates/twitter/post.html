@@ -45,7 +45,8 @@
         {% for x in post.getComments %}
             <div class = "comment">
                 <span class = "commenttext">
-                    <a href = "{% url 'profile' username=x.user %}">{{x.user}}</a> - {{x.text}} 
+                    <a href = "{% url 'profile' username=x.user %}">{{x.user}}</a> - <a href = "{% url 'comment' pk=x.pk %}" >{{x.text}}</a> 
+                    <span class = "right">Likes - {{x.likes}} | Comments - {{x.comments}}</span>
                 </span>
             </div>
         {% endfor %}

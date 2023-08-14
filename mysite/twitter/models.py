@@ -37,16 +37,20 @@ class Comment(models.Model):
     pub_date = models.DateTimeField("date published")
     user = models.ForeignKey(User2, on_delete=models.CASCADE)
     likes = models.IntegerField(default = 0)
+    likedBy = models.ManyToManyField(User2, related_name="comment_like")
     comments = models.IntegerField(default = 0)
     post = models.ForeignKey(Post, on_delete=models.CASCADE)
     def __str__(self):
         return str(self.user) + " - " + self.text
+    def getCommentsFix(self):
+        return CommentUnderComment.objects.filter(post = self)
 
 class CommentUnderComment(models.Model):
     text = models.CharField(max_length = 200)
     pub_date = models.DateTimeField("date published")
     user = models.ForeignKey(User2, on_delete = models.CASCADE)
     likes = models.IntegerField(default = 0)
+    likedBy = models.ManyToManyField(User2, related_name="commentplus_like")
     comments = models.IntegerField(default = 0)
     post = models.ForeignKey(Comment, on_delete=models.CASCADE)
     def __str__(self):

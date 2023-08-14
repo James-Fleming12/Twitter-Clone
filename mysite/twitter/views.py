@@ -61,6 +61,28 @@ def PostView(request, pk):
     context = {"post": tempPost, "liked": liked, "own": own}
     return render(request, 'twitter/post.html', context)
 
+def CommentView(request, pk):
+    tempComment = get_object_or_404(Comment, pk=pk)
+    user = get_object_or_404(User2, username = request.user.username)
+    liked = False; own = False; postLiked = False
+    if tempComment.likedBy.filter(username=user.username).exists():
+        liked=True
+    if tempComment.user.username == user.username:
+        own = True
+    if tempComment.post.likedBy.filter(username=user.username).exists():
+        postLiked = True
+    if request.method == "POST":
+        if request.POST['comment'] != "":
+            user2 = User2.objects.filter(username = request.user.username)
+            text = request.POST['comment']
+            tempCommentPlus = CommentUnderComment.objects.create(text = text, user=user2[0], pub_date=timezone.now(), post = Comment.objects.get(pk=pk))
+            tempCommentPlus.save()
+            tempComment.comments += 1
+            tempComment.save() 
+            return redirect('comment', pk=pk)
+    context = {"comment": tempComment, "liked": liked, "own": own, "postliked": postLiked}
+    return render(request, 'twitter/comment.html', context)
+
 def PostLike(request, pk):
     user = get_object_or_404(User2, username=request.user.username)
     post = get_object_or_404(Post, pk=pk)
@@ -71,11 +93,28 @@ def PostLike(request, pk):
         post.likedBy.add(user)
         post.likes = post.likes+1 
     post.save()
-    return HttpResponseRedirect(reverse('post', args=[str(pk)]))
+    return HttpResponseRedirect(reverse('post', args=[int(pk)]))
+
+def CommentLike(request, pk):
+    user = get_object_or_404(User2, username=request.user.username)
+    comment = get_object_or_404(Comment, pk=pk)
+    if comment.likedBy.filter(username=user.username).exists():
+        comment.likedBy.remove(user)
+        comment.likes = comment.likes-1
+    else: 
+        comment.likedBy.add(user)
+        comment.likes = comment.likes+1 
+    comment.save() 
+    return HttpResponseRedirect(reverse('comment', args=[int(pk)]))
 
 def DeletePost(request, pk):
     post = get_object_or_404(Post, pk=pk)
     post.delete() 
+    return HttpResponseRedirect(reverse('home'))
+
+def DeleteComment(request, pk):
+    comment = get_object_or_404(Comment, pk=pk)
+    comment.delete() 
     return HttpResponseRedirect(reverse('home'))
 
 def CreatePost(request):

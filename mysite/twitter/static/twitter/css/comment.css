@@ -5,10 +5,6 @@
     background-color:rgb(24, 21, 21);
     top:0px;
 }
-.right{
-    float:right; 
-    font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif; 
-}
 .homebutton{
     padding:5px; 
     height:20px;
@@ -27,10 +23,15 @@
     padding:15px; 
     margin:20px;
     margin-top: 70px;
+    margin-bottom:10px;
     border-radius: 30px; 
     height:auto;
     color:white; 
     background-color:rgb(54, 46, 108); 
+}
+.differentmargin{ /* couldnt get nth child to work for some reason */
+    margin-top:10px;
+    margin-bottom:20px; 
 }
 .post span{
     font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
@@ -139,7 +140,7 @@ body{
     background-color:black;
     padding:0.1px; 
 }
-.poststats{
+.commentstats{
     border:solid 1px; 
     color:white;
     border-color:white;
@@ -154,7 +155,7 @@ body{
     background-color:transparent; 
     cursor: pointer; 
 }
-.poststatsliked{
+.commentstatsliked{
     border:solid 1px; 
     color:lightskyblue;
     border-color:lightskyblue;
@@ -185,4 +186,11 @@ body{
 }
 .inline{
     display:inline;
+}
+hr{
+    margin:10px;
+    width:80%;
+}
+body{
+    padding:0.05px;
 }
