@@ -20,4 +20,5 @@ urlpatterns = [
     path("bookmarks", views.Bookmarks, name="bookmarks"),
     path("lists", views.Lists, name="lists"),
     path("list/<int:pk>", views.List, name="list"),
+    path("createlist", views.CreateList, name="createlist"),
 ]

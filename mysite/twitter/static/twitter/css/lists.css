@@ -9,7 +9,7 @@
     background-color:rgb(54, 46, 108); 
 }
 .postbox{
-    margin-top:55px;
+    margin-top:60px;
 }
 .postbox p{
     margin-left:10px;
@@ -24,8 +24,15 @@ body{
 }
 .post h2{
     font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
-    display:inline; 
+    display:inline-block; 
     margin-left: 5px; 
+}
+.post h4{
+    font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    display:inline-block; 
+    margin-left: 5px; 
+    position:relative;
+    bottom:2px;
 }
 .post span{
     font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
@@ -35,6 +42,13 @@ body{
 *{
     margin:0;
     padding:0;
+}
+h1{
+    color:white;
+    font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+}
+.extraspace{ /* nth child didnt work again */
+    margin-top:10px;
 }
 .navbar{
     position:fixed; 
@@ -65,5 +79,47 @@ a:onclick{
 }
 p{
     color:white;
+    margin:10px;
     font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+}
+.postform{
+    border-radius: 10px; 
+    padding: 5px; 
+    margin:10px;
+    border: solid 1px white; 
+    width:fit-content;
+}
+.textform{
+    outline:none;
+    border:none;
+    box-shadow:none;
+    padding:5px;
+    color:white;
+    border:solid 1px white;
+    background-color:transparent;
+    border-radius:5px;
+    width:100px; 
+}
+.othertextform{
+    width:300px; 
+}
+.textform::placeholder{
+    color:white;
+}
+.formbutton{
+    background-color:lightskyblue; 
+    border: solid 1px blue;
+    color:blue; 
+    font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    padding: 5px;
+    border-radius: 5px;
+    font-size:auto;
+    cursor:pointer;
+}
+.textform:focus{
+    outline:none;
+}
+.textform:onclick{ 
+    box-sizing:border-box;
+    height:calc(100% - 6px);
 }

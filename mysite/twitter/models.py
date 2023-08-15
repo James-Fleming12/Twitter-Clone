@@ -42,6 +42,7 @@ class PostList(models.Model): # make sure this name doesnt cause any errors, hop
     posts = models.ManyToManyField(Post, related_name="listed_post")
     user = models.ForeignKey(User2, on_delete=models.CASCADE, null=True) 
     name = models.CharField(max_length = 200, default = "List")
+    description = models.CharField(max_length = 200, default = "description...")
     numPosts = models.IntegerField(default=0) # figure out how to get length of the posts thing later for future models
 
 class Comment(models.Model):

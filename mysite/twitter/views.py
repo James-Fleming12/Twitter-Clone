@@ -124,6 +124,16 @@ def CreatePost(request):
     user.save() 
     return HttpResponseRedirect(reverse('home'))
 
+def CreateList(request): 
+    user = get_object_or_404(User2, username=request.user.username)
+    name = request.POST['name']
+    desc = request.POST['desc']
+    newlist = PostList.objects.create(user=user, name=name, description=desc)
+    newlist.save() 
+    user.ownlists.add(newlist)
+    user.save() 
+    return HttpResponseRedirect(reverse('lists'))
+
 def Following(request):
     user = get_object_or_404(User2, username=request.user.username)
     userlist = []
@@ -171,7 +181,10 @@ def Lists(request):
     list = user.ownlists.all(); owned = True
     if len(list) == 0:
         owned = False 
-    context = {"lists": list, "owned": owned}
+    savedlist = user.savedlists.all(); saved = True
+    if len(savedlist) == 0:
+        saved = False
+    context = {"lists": list, "owned": owned, "savedlist": savedlist, "saved": saved}
     return render(request, 'twitter/lists.html', context)
 
 def List(request, pk):
