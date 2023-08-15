@@ -18,6 +18,6 @@ urlpatterns = [
     path("following", views.Following, name="following"),
     path("bookmark/<int:pk>", views.Bookmark, name="bookmark"),
     path("bookmarks", views.Bookmarks, name="bookmarks"),
-    path("lists", views.Lists, name="lists")
-    path("list/<int:pk>", views.List, name="list")
+    path("lists", views.Lists, name="lists"),
+    path("list/<int:pk>", views.List, name="list"),
 ]
