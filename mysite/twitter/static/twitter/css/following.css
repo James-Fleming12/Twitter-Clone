@@ -1,9 +1,13 @@
 .accounts{
     visibility:visible; 
     margin-top:65px;
+    width:100%; 
 }
 .posts{
     visibility:hidden; 
+    margin-top:63px; 
+    width:100%; 
+    height:fit-content; 
 }
 
 .account{
@@ -30,6 +34,9 @@
     font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
     bottom:5px;
 }
+button:nth-child(2){
+    margin-left:0; 
+}
 
 .unactive{
     padding:5px; 
@@ -45,9 +52,9 @@
     box-shadow:none;
     box-sizing:initial;
 }
-.unactive:hover{
-    color:black; 
-    background-color:white; 
+.unactive:hover, .active:hover{
+    color:gray; 
+    background-color:lightgray; 
 }
 .active{
     padding:5px; 
@@ -61,10 +68,6 @@
     float:right; 
     box-sizing:initial;
     border:none;
-}
-.active:hover{
-    color:white;
-    background-color:black; 
 }
 
 .navbar{

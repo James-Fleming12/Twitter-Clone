@@ -34,11 +34,8 @@ def ProfileView(request, username):
         followed = True 
     # post_list = loader(tempUser.post.objects.order_by("pub-date")[:5])
     post_list = Post.objects.filter(user = tempUser).order_by("-pub_date")
-    context = {"post_list": post_list, "username": username, "followed": followed}
+    context = {"post_list": post_list, "username": username, "followed": followed, "user": tempUser}
     return render(request, "twitter/profile.html", context)
-
-def FollowingView(request): # show all accounts that you follow and another page that shows all posts by accounts you follow toggleable by a button
-    tempUser = get_object_or_404(User2, username=request.user.username)
 
 def PostView(request, pk):
     tempPost = get_object_or_404(Post, pk=pk)
@@ -131,7 +128,7 @@ def Following(request):
     userlist = []
     for x in user.following.all():
         userlist.append(User2.objects.get(username=x.username))
-    postlist = Post.objects.filter(user__in = userlist)
+    postlist = Post.objects.filter(user__in = userlist).order_by("-pub_date")
     context = {"accountlist": userlist, "postlist": postlist}
     return render(request, 'twitter/following.html', context)
 

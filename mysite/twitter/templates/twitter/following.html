@@ -13,10 +13,10 @@
         <a href = "{% url 'home' %}"><div class = "homebutton">
             Home
         </div></a>
-        <button class="unactive">Posts</button>
-        <button class="active">Accounts</button>
+        <button onclick = "switchScreen()" class="unactive" id="postbutton">Posts</button>
+        <button onclick = "switchScreen()" class="active" id="accountbutton">Accounts</button>
     </div> 
-    <div class = "accounts">
+    <div class = "accounts" id = "accounts">
         {% if accountlist %}
             {% for account in accountlist %}
                 <div class = "account">
@@ -29,7 +29,7 @@
 
         {% endif %}
     </div>
-    <div class = "posts">
+    <div class = "posts" id = "posts">
         {% if postlist %}
             {% for post in postlist %}
                 <div class = "post">
