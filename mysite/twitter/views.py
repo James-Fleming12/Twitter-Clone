@@ -83,10 +83,6 @@ def CommentView(request, pk):
     context = {"comment": tempComment, "liked": liked, "own": own, "postliked": postLiked}
     return render(request, 'twitter/comment.html', context)
 
-def CommentUnderView(request, pk):
-    tempComment = get_object_or_404(CommentUnderComment, pk=pk)
-    user = get_object_or_404(User2, username = request.user.username)
-
 def PostLike(request, pk):
     user = get_object_or_404(User2, username=request.user.username)
     post = get_object_or_404(Post, pk=pk)
@@ -126,16 +122,32 @@ def CreatePost(request):
     text = request.POST['text']
     newpost = Post.objects.create(user=user, text=text, pub_date=timezone.now())
     newpost.save()
+    user.posts += 1
+    user.save() 
     return HttpResponseRedirect(reverse('home'))
+
+def Following(request):
+    user = get_object_or_404(User2, username=request.user.username)
+    userlist = []
+    for x in user.following.all():
+        userlist.append(User2.objects.get(username=x.username))
+    postlist = Post.objects.filter(user__in = userlist)
+    context = {"accountlist": userlist, "postlist": postlist}
+    return render(request, 'twitter/following.html', context)
 
 def Follow(request, username):
     user = get_object_or_404(User2, username=request.user.username)
     user2 = get_object_or_404(User2, username=username)
     if user.following.filter(username=user2.username).exists():
         user.following.remove(FollowObj.objects.get(username=username))
+        user.followers -= 1
+        user2.followingNum -=1 
     else:
         user.following.add(FollowObj.objects.get(username=username))
+        user.followers += 1
+        user2.followingNum +=1 
     user.save()
+    user2.save() 
     return HttpResponseRedirect(reverse('profile', args=[str(username)]))
 
 def LogIn(request):

@@ -1,4 +1,4 @@
-add CommentUnderComment screens (with delete buttons)
+figure out how to work the comments under comments (commentUnderComment will not work for an infinite amoujnt of replys)
 add following accounts page (two seperate toggles for accounts or posts of followed accounts)
 add bookmarks (replaces delete button on posts that aren't owned)
 add notifications page for new follows and new comments 

@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Following</title>
+    {%load static %}
+    <link rel = "stylesheet" href = "{% static 'twitter/css/following.css' %}">
+    <script src="{% static 'twitter/js/following.js'%}"></script> 
+</head>
+<body>
+    <div class = "navbar">
+        <a href = "{% url 'home' %}"><div class = "homebutton">
+            Home
+        </div></a>
+        <button class="unactive">Posts</button>
+        <button class="active">Accounts</button>
+    </div> 
+    <div class = "accounts">
+        {% if accountlist %}
+            {% for account in accountlist %}
+                <div class = "account">
+                    <img src = "{% static 'twitter/images/default.png' %}", width = 30px, height = 30px/>
+                    <a href = "{% url 'profile' username=account.username %}"><h2>{{account.username}}</h2></a> 
+                    <span> Following - {{account.followingNum}} | Followers - {{account.followers}} | Posts - {{account.posts}}</span> 
+                </div> 
+            {% endfor %}
+        {% else %}
+
+        {% endif %}
+    </div>
+    <div class = "posts">
+        {% if postlist %}
+            {% for post in postlist %}
+                <div class = "post">
+                    {% load static %}
+                    <img src = "{% static 'twitter/images/default.png' %}", width = 30px, height = 30px/>
+                    <a href = "{% url 'profile' username=post.user %}"><h2>{{post.user}}</h2></a> 
+                    <p class = "poststats">Likes - {{post.likes}} | Comments - {{post.commentsCount}}</p> <br>
+                    <a href = "{% url 'post' pk=post.pk%}"> 
+                        <span>{{post.text}}</span> 
+                    </a>
+                </div>
+            {% endfor %}
+        {% else %}
+            <p>No Posts from followed accounts</p>
+        {% endif %}
+    </div>
+</body>
+</html>

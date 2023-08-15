@@ -15,6 +15,9 @@ class User2(models.Model): #don't delete follows or user2s manually, because you
     password = models.CharField(max_length = 200, default = "password")
     profile_picture = models.ImageField(upload_to = "media/twitter/", default = "static/twitter/default.png") 
     following = models.ManyToManyField(FollowObj, related_name="follow_account")
+    followers = models.IntegerField(default = 0)
+    followingNum = models.IntegerField(default = 0)
+    posts = models.IntegerField(default = 0)
     def __str__(self):
         return self.username 
 
