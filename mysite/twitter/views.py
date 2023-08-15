@@ -40,12 +40,13 @@ def ProfileView(request, username):
 def PostView(request, pk):
     tempPost = get_object_or_404(Post, pk=pk)
     user = get_object_or_404(User2, username=request.user.username)
-    liked = False
-    own = False
+    liked = False; own = False; bookmarked = False 
     if tempPost.likedBy.filter(username=user.username).exists():
         liked = True
     if tempPost.user.username == user.username:
         own = True
+    if user.bookmarks.filter(pk=tempPost.pk).exists(): 
+        bookmarked = True
     if request.method == "POST":
         if request.POST['comment'] != "": 
             user2 = User2.objects.filter(username = request.user.username)
@@ -55,7 +56,7 @@ def PostView(request, pk):
             tempPost.commentsCount += 1
             tempPost.save()
             return redirect('post', pk = pk)
-    context = {"post": tempPost, "liked": liked, "own": own}
+    context = {"post": tempPost, "liked": liked, "own": own, "bookmarked": bookmarked}
     return render(request, 'twitter/post.html', context)
 
 def CommentView(request, pk):
@@ -146,6 +147,37 @@ def Follow(request, username):
     user.save()
     user2.save() 
     return HttpResponseRedirect(reverse('profile', args=[str(username)]))
+
+def Bookmark(request, pk):
+    user = get_object_or_404(User2, username=request.user.username)
+    post = get_object_or_404(Post, pk=pk)
+    if user.bookmarks.filter(pk=post.pk).exists(): 
+        user.bookmarks.remove(post)
+    else:
+        user.bookmarks.add(post)
+    user.save() 
+    return HttpResponseRedirect(reverse('post', args=[int(pk)]))
+
+def Bookmarks(request):
+    user = get_object_or_404(User2, username=request.user.username)
+    bookmarklist = user.bookmarks.all(); full = True
+    if len(bookmarklist) == 0:
+        full = False
+    context = {"bookmarklist": bookmarklist, "full": full}
+    return render(request, 'twitter/bookmark.html', context)
+
+def Lists(request):
+    user = get_object_or_404(User2, username=request.user.username)
+    list = user.ownlists.all(); owned = True
+    if len(list) == 0:
+        owned = False 
+    context = {"lists": list, "owned": owned}
+    return render(request, 'twitter/lists.html', context)
+
+def List(request, pk):
+    list = PostList.objects.get(pk=pk)
+    context = {"list": list}
+    return render(request, 'twitter/list.html', context)
 
 def LogIn(request):
     if request.method == "POST":

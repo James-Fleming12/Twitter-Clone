@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>{{username}}'s Profile</title>
     {%load static %}
     <link rel = "stylesheet" href = "{% static 'twitter/css/profile.css' %}">
     <script src="{% static 'twitter/js/profile.js'%}"></script> 
@@ -26,7 +26,7 @@
     <div class = "postbox">
         {% if post_list %}
             {% for post in post_list %}
-                <div class = "post">
+                <div class = "post"> 
                     {% load static %}
                     <img src = "{% static 'twitter/images/default.png' %}", width = 30px, height = 30px>
                     <h2>{{post.user}}</h2> <br>

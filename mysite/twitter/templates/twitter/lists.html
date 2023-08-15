@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lists</title>
+    {% load static %}
+    <link rel = "stylesheet" href = "{% static 'twitter/css/lists.css' %}">
+</head>
+<body>
+    <div class = "navbar">
+        <a href = "{% url 'home' %}"><div class = "homebutton">
+            Home
+        </div></a>
+    </div>
+    <div class = "postbox">
+        <form method = "POST">
+
+        </form>
+        {% if owned %}
+            {% for list in lists %}
+                <a href = "{% url 'list' pk=list.pk %}"><div class = "post">
+                    <h2>{{list.name}}</h2>
+                    <h4>{{list.postsNum}}</h4> 
+                </div></a>
+            {% endfor %}
+        {% else %}
+            <p>No Lists Made</p>
+        {% endif %}
+    </div>
+</body>
+</html>

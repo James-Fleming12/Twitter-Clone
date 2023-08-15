@@ -21,6 +21,15 @@
                     {% csrf_token %}
                     <button class = "delbutton" type="submit">Delete</button> 
                 </form> 
+            {% else %}
+                <form class = "inline" action="{% url 'bookmark' pk=post.pk%}" method="POST">
+                    {% csrf_token %}
+                    {% if bookmarked %}
+                        <button class = "delbutton bookmarkedbutton" type = "submit">Bookmarked</button>
+                    {% else %}
+                        <button class = "delbutton bookmarkbutton" type = "submit">Bookmark</button>
+                    {% endif %}
+                </form>
             {% endif %}
             <br>
             <span>{{post.text}}</span> 

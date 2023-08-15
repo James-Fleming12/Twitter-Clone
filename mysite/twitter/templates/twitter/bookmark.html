@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bookmarks</title>
+    {% load static %}
+    <link rel = "stylesheet" href = "{% static '/twitter/css/bookmark.css' %}">
+</head>
+<body>
+    <div class = "navbar">
+        <a href = "{% url 'home' %}"><div class = "homebutton">
+            Home
+        </div></a>
+    </div> 
+    <div class = "postbox"> 
+        {% if full %}
+            {% for post in bookmarklist %}
+                <div class = "post"> 
+                    {% load static %}
+                    <img src = "{% static 'twitter/images/default.png' %}", width = 30px, height = 30px>
+                    <h2>{{post.user}}</h2> <br>
+                    <a href = "{% url 'post' pk=post.pk %}"><span>{{post.text}}</span></a>
+                </div>
+            {% endfor %}
+        {% else %}
+            <p>No Posts Bookmarked</p> 
+        {% endif %}
+    </div> 
+</div>
+</body>
+</html>

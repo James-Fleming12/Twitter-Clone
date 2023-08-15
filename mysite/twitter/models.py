@@ -15,8 +15,11 @@ class User2(models.Model): #don't delete follows or user2s manually, because you
     password = models.CharField(max_length = 200, default = "password")
     profile_picture = models.ImageField(upload_to = "media/twitter/", default = "static/twitter/default.png") 
     following = models.ManyToManyField(FollowObj, related_name="follow_account")
+    bookmarks = models.ManyToManyField('Post', related_name="bookmarked_post") #if you want to define a relationship between two objects you can just use a string for the object name
     followers = models.IntegerField(default = 0)
     followingNum = models.IntegerField(default = 0)
+    savedlists = models.ManyToManyField('PostList', related_name="saved_list")
+    ownlists = models.ManyToManyField('PostList', related_name="own_list")
     posts = models.IntegerField(default = 0)
     def __str__(self):
         return self.username 
@@ -35,6 +38,12 @@ class Post(models.Model):
     def likedByUser(self, username):
         return User2.objects.get(username=username) in self.likedBy 
     
+class PostList(models.Model): # make sure this name doesnt cause any errors, hopefully not
+    posts = models.ManyToManyField(Post, related_name="listed_post")
+    user = models.ForeignKey(User2, on_delete=models.CASCADE, null=True) 
+    name = models.CharField(max_length = 200, default = "List")
+    numPosts = models.IntegerField(default=0) # figure out how to get length of the posts thing later for future models
+
 class Comment(models.Model):
     text = models.CharField(max_length = 200)
     pub_date = models.DateTimeField("date published")

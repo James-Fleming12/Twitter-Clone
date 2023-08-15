@@ -183,6 +183,15 @@ body{
     bottom:20px;
     position:relative;
 }
+.bookmarkbutton{
+    color:white;
+    border-color:white; 
+}
+.bookmarkedbutton{
+    color:green;
+    border-color:green;
+    background-color:lightgreen; 
+}
 .inline{
     display:inline;
 }
