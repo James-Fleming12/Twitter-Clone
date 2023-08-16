@@ -14,13 +14,15 @@
         </div></a>
     </div>
     <div class = "postbox">
-        <center><form action="{% url 'createlist' %}" method = "POST" class = "postform">
-            {% csrf_token %}
-            <input class = "textform" type = "text" placeholder = "Name..." name = "name" id = "name" autocomplete = "off">
-            <input class = "textform othertextform" type = "text" placeholder = "Description..." name = "desc" id = "desc" autocomplete = "off">
-            <button class = "formbutton" type = "submit">Submit</button>
-        </form></center>
-        <center><h1>Owned Lists</h1></center>
+        {% if own %}
+            <center><form action="{% url 'createlist' %}" method = "POST" class = "postform">
+                {% csrf_token %}
+                <input class = "textform" type = "text" placeholder = "Name..." name = "name" id = "name" autocomplete = "off">
+                <input class = "textform othertextform" type = "text" placeholder = "Description..." name = "desc" id = "desc" autocomplete = "off">
+                <button class = "formbutton" type = "submit">Submit</button>
+            </form></center>
+        {% endif %}
+        <center><h1>{{username}}'s Lists</h1></center>
         {% if owned %}
             {% for list in lists %}
                 <a href = "{% url 'list' pk=list.pk %}"><div class = "post">
@@ -31,16 +33,18 @@
         {% else %}
             <center><p>No Lists Made</p></center>
         {% endif %}
+        {% if own %}
         <center><h1 class="extraspace">Saved Lists</h1></center>
-        {% if saved %}
-                {% for list in savedlist %}
-                    <a href = "{% url 'list' pk=list.pk %}"><div class = "post">
-                        <h2>{{list.name}}</h2>
-                        <h4>{{list.description}} - Posts: {{list.numPosts}}</h4> 
-                    </div></a>
-                {% endfor %}
-        {% else %}
-            <center><p>No Lists Saved</p></center>
+            {% if saved %}
+                    {% for list in savedlist %}
+                        <a href = "{% url 'list' pk=list.pk %}"><div class = "post">
+                            <h2>{{list.name}}</h2>
+                            <h4>{{list.description}} - Posts: {{list.numPosts}}</h4> 
+                        </div></a>
+                    {% endfor %}
+            {% else %}
+                <center><p>No Lists Saved</p></center>
+            {% endif %}
         {% endif %}
     </div>
 </body>

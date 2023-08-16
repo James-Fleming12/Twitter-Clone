@@ -149,12 +149,12 @@ def Follow(request, username):
     user2 = get_object_or_404(User2, username=username)
     if user.following.filter(username=user2.username).exists():
         user.following.remove(FollowObj.objects.get(username=username))
-        user.followers -= 1
-        user2.followingNum -=1 
+        user.followingNum -= 1
+        user2.followers -=1 
     else:
         user.following.add(FollowObj.objects.get(username=username))
-        user.followers += 1
-        user2.followingNum +=1 
+        user.followingNum += 1
+        user2.followers +=1 
     user.save()
     user2.save() 
     return HttpResponseRedirect(reverse('profile', args=[str(username)]))
@@ -171,7 +171,7 @@ def Bookmark(request, pk):
 
 def Bookmarks(request):
     user = get_object_or_404(User2, username=request.user.username)
-    bookmarklist = user.bookmarks.all(); full = True
+    bookmarklist = user.bookmarks.all().order_by("-pub_date"); full = True
     if len(bookmarklist) == 0:
         full = False
     context = {"bookmarklist": bookmarklist, "full": full}
@@ -180,7 +180,7 @@ def Bookmarks(request):
 def Lists(request, username):
     user = get_object_or_404(User2, username=request.user.username)
     listuser = get_object_or_404(User2, username=username)
-    list = user.ownlists.all(); owned = True; own = False
+    list = listuser.ownlists.all(); owned = True; own = False
     if len(list) == 0:
         owned = False 
     savedlist = user.savedlists.all(); saved = True
@@ -188,7 +188,7 @@ def Lists(request, username):
         saved = False
     if user.username == listuser.username:
         own = True
-    context = {"lists": list, "owned": owned, "savedlist": savedlist, "saved": saved, "own": own}
+    context = {"lists": list, "owned": owned, "savedlist": savedlist, "saved": saved, "own": own, "username": username}
     return render(request, 'twitter/lists.html', context)
 
 def List(request, pk):
