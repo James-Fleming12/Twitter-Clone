@@ -177,15 +177,18 @@ def Bookmarks(request):
     context = {"bookmarklist": bookmarklist, "full": full}
     return render(request, 'twitter/bookmark.html', context)
 
-def Lists(request):
+def Lists(request, username):
     user = get_object_or_404(User2, username=request.user.username)
-    list = user.ownlists.all(); owned = True
+    listuser = get_object_or_404(User2, username=username)
+    list = user.ownlists.all(); owned = True; own = False
     if len(list) == 0:
         owned = False 
     savedlist = user.savedlists.all(); saved = True
     if len(savedlist) == 0:
         saved = False
-    context = {"lists": list, "owned": owned, "savedlist": savedlist, "saved": saved}
+    if user.username == listuser.username:
+        own = True
+    context = {"lists": list, "owned": owned, "savedlist": savedlist, "saved": saved, "own": own}
     return render(request, 'twitter/lists.html', context)
 
 def List(request, pk):
