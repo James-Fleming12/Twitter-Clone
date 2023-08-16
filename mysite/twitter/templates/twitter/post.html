@@ -31,6 +31,10 @@
                     {% endif %}
                 </form>
             {% endif %}
+            <form action = "{% url 'addlist' %}" method = "POST"> 
+                {% csrf_token %}
+                
+            </form>
             <br>
             <span>{{post.text}}</span> 
             <form action="{% url 'likepost' pk=post.pk %}" method="POST">
