@@ -128,10 +128,11 @@ def CreateList(request):
     user = get_object_or_404(User2, username=request.user.username)
     name = request.POST['name']
     desc = request.POST['desc']
-    newlist = PostList.objects.create(user=user, name=name, description=desc)
-    newlist.save() 
-    user.ownlists.add(newlist)
-    user.save() 
+    if name != None and desc != None: 
+        newlist = PostList.objects.create(user=user, name=name, description=desc)
+        newlist.save() 
+        user.ownlists.add(newlist)
+        user.save() 
     return HttpResponseRedirect(reverse('lists'))
 
 def Following(request):

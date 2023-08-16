@@ -86,7 +86,7 @@ p{
     border-radius: 10px; 
     padding: 5px; 
     margin:10px;
-    border: solid 1px white; 
+    border: solid 1px lightslategray; 
     width:fit-content;
 }
 .textform{
@@ -94,8 +94,8 @@ p{
     border:none;
     box-shadow:none;
     padding:5px;
-    color:white;
-    border:solid 1px white;
+    color:lightslategray;
+    border:solid 1px lightslategray;
     background-color:transparent;
     border-radius:5px;
     width:100px; 
@@ -104,7 +104,7 @@ p{
     width:300px; 
 }
 .textform::placeholder{
-    color:white;
+    color:lightslategray;
 }
 .formbutton{
     background-color:lightskyblue; 
