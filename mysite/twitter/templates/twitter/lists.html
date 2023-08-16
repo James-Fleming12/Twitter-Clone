@@ -33,16 +33,18 @@
         {% else %}
             <center><p>No Lists Made</p></center>
         {% endif %}
-        <center><h1 class="extraspace">Saved Lists</h1></center>
-        {% if saved %}
-                {% for list in savedlist %}
-                    <a href = "{% url 'list' pk=list.pk %}"><div class = "post">
-                        <h2>{{list.name}}</h2>
-                        <h4>{{list.description}} - Posts: {{list.numPosts}}</h4> 
-                    </div></a>
-                {% endfor %}
-        {% else %}
-            <center><p>No Lists Saved</p></center>
+        {% if own %}
+            <center><h1 class="extraspace">Saved Lists</h1></center>
+            {% if saved %}
+                    {% for list in savedlist %}
+                        <a href = "{% url 'list' pk=list.pk %}"><div class = "post">
+                            <h2>{{list.name}}</h2>
+                            <h4>{{list.description}} - Posts: {{list.numPosts}}</h4> 
+                        </div></a>
+                    {% endfor %}
+            {% else %}
+                <center><p>No Lists Saved</p></center>
+            {% endif %}
         {% endif %}
     </div>
 </body>

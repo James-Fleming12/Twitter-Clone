@@ -13,7 +13,7 @@
     background-color:rgb(54, 46, 108); 
 }
 .postbox{
-    margin-top:5px;
+    margin-top:65px;
 }
 .posttext{
     font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
@@ -63,4 +63,9 @@ a:onclick{
 p{
     color:white;
     font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+}
+h2{
+    color:white;
+    font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif; 
+    margin-left:20px;
 }

@@ -4,6 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{{list.name}}</title>
+    {% load static %}
+    <link rel = "stylesheet" href = "{% static '/twitter/css/list.css' %}">
 </head>
 <body>
     <div class = "navbar">
@@ -11,5 +13,22 @@
             Home
         </div></a>
     </div> 
+    <div class = "postbox">
+        {% if empty %}
+            <h2>No Posts In List</h2>
+        {% else %}
+            {% for post in listlist %}
+                <div class="post">
+                    {% load static %}
+                    <img src = "{% static 'twitter/images/default.png' %}", width = 30px, height = 30px/>
+                    <a href = "{% url 'profile' username=post.user %}"><h2>{{post.user}}</h2></a> 
+                    <p class = "poststats">Likes - {{post.likes}} | Comments - {{post.commentsCount}}</p> <br>
+                    <a href = "{% url 'post' pk=post.pk%}"> 
+                        <span>{{post.text}}</span> 
+                    </a>
+                </div>
+            {% endfor %}
+        {% endif %}
+    </div>
 </body>
 </html>

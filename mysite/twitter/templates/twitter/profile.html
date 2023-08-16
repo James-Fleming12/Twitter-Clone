@@ -18,9 +18,9 @@
     <form action="/twitter/follow/{{username}}" method = "POST"> 
         {% csrf_token %}
         {% if followed %}
-            <button class = "followedbutton" type = "submit">Follow</button>
+            <button class = "followedbutton pointer" type = "submit">Follow</button>
         {% else %}
-            <button class = "followbutton" type = "submit">Follow</button>
+            <button class = "followbutton pointer" type = "submit">Follow</button>
         {% endif %}
     </form>
     <div class = "postbox">

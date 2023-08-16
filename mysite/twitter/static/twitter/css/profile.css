@@ -8,6 +8,9 @@ h2{
 form{
     display:inline-block;
 }
+.pointer{
+    cursor: pointer; 
+}
 .followbutton{
     padding: 2px; 
     font-size:15px;

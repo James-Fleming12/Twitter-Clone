@@ -193,7 +193,11 @@ def Lists(request, username):
 
 def List(request, pk):
     list = PostList.objects.get(pk=pk)
-    context = {"list": list}
+    listlist = list.posts.all() 
+    empy = False
+    if len(listlist) == 0:
+        empty = True
+    context = {"list": list, "empty": empty, "listlist": listlist}
     return render(request, 'twitter/list.html', context)
 
 def LogIn(request):
