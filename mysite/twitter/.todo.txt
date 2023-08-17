@@ -1,2 +1,3 @@
-figure out how to work the comments under comments (commentUnderComment will not work for an infinite amoujnt of replys) (just give up on this one til later)
-add notifications page for new follows and new comments 
+OPTIONAL AT THIS POINT I WANT TO MOVE ON
+    figure out how to work the comments under comments (commentUnderComment will not work for an infinite amoujnt of replys) (just give up on this one til later)
+    fix notifications so theyre not spammable and so that they contain more information [links to post liked or account that followed you] 

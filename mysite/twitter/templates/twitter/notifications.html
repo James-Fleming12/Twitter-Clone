@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Notifications</title>
+    {% load static %}
+    <link rel = "stylesheet" href = "{% static '/twitter/css/notifications.css' %}">
+</head>
+<body>
+    <div class="navbar">
+        <a href = "{% url 'home' %}"><div class = "homebutton"> Home </div></a>
+    </div> 
+    <div class = "postbox">
+        {% if haslist %}
+            {% for noti in list %}
+                <div class = "post">
+                    <h1>{{noti.text}}</h1>
+                </div> 
+            {% endfor %}
+        {% else %}
+            <h2>No Notifications Currently</h2>
+        {% endif %}
+    </div>
+</body>
+</html>

@@ -93,6 +93,10 @@ def PostLike(request, pk):
     else: 
         post.likedBy.add(user)
         post.likes = post.likes+1 
+    noti = Notification.objects.create(postUser = user, recieveUser = post.user, text = user.username + " has liked one of your posts") 
+    noti.save() 
+    post.user.notificationlist.add(noti)
+    post.user.save() 
     post.save()
     return HttpResponseRedirect(reverse('post', args=[int(pk)]))
 
@@ -105,6 +109,10 @@ def CommentLike(request, pk):
     else: 
         comment.likedBy.add(user)
         comment.likes = comment.likes+1 
+    noti = Notification.objects.create(postUser = user, recieveUser = comment.user, text=user.username + " has liked one of your comments")
+    noti.save() 
+    comment.user.notificationlist.add(noti)
+    comment.user.save() 
     comment.save() 
     return HttpResponseRedirect(reverse('comment', args=[int(pk)]))
 
@@ -158,9 +166,22 @@ def Follow(request, username):
         user.following.add(FollowObj.objects.get(username=username))
         user.followingNum += 1
         user2.followers +=1 
+        noti = Notification.objects.create(postUser = user, recieveUser = user2, text = user.username + " has started to follow you")
+        noti.save() 
+        user2.notificationlist.add(noti)
+        user2.save()  
     user.save()
     user2.save() 
     return HttpResponseRedirect(reverse('profile', args=[str(username)]))
+
+def Notifications(request):
+    user = User2.objects.get(username=request.user.username)
+    list = user.notificationlist.all() 
+    haslist = True
+    if len(list) == 0:
+        haslist = False
+    context = {"list": list, "haslist": haslist}
+    return render(request, "twitter/notifications.html", context)
 
 def Bookmark(request, pk):
     user = get_object_or_404(User2, username=request.user.username)

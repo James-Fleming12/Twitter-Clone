@@ -21,6 +21,7 @@ class User2(models.Model): #don't delete follows or user2s manually, because you
     savedlists = models.ManyToManyField('PostList', related_name="saved_list")
     ownlists = models.ManyToManyField('PostList', related_name="own_list")
     posts = models.IntegerField(default = 0)
+    notificationlist = models.ManyToManyField('Notification', related_name="notifications")
     def __str__(self):
         return self.username 
 
@@ -37,7 +38,14 @@ class Post(models.Model):
         return Comment.objects.filter(post = self)
     def likedByUser(self, username):
         return User2.objects.get(username=username) in self.likedBy 
-    
+
+class Notification(models.Model):
+    # you probably couldve included something that says what the notification is notifying so that you could include links and the such but i didnt feel like it so boo hoo 
+    postUser = models.ForeignKey(User2, on_delete = models.CASCADE, related_name="postuser")
+    recieveUser = models.ForeignKey(User2, on_delete = models.CASCADE, related_name="recieveuser")
+    text = models.CharField(max_length=200)
+    link = models.CharField(max_length=200, default = "")
+
 class PostList(models.Model): # make sure this name doesnt cause any errors, hopefully not
     posts = models.ManyToManyField(Post, related_name="listed_post")
     user = models.ForeignKey(User2, on_delete=models.CASCADE, null=True) 
