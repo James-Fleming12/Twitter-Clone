@@ -195,3 +195,27 @@ body{
 .inline{
     display:inline;
 }
+.extraup{
+    position:relative; 
+    bottom:20px;
+}
+.dropdown{
+    display:inline-block;
+    position:relative;
+    padding:5px;
+    bottom:1px;
+    font-size:8px; 
+    border: solid 1px white;
+    background-color:transparent; 
+    color:white;
+}
+.dropdown option{
+    color:white;
+    background-color:black; 
+}
+.dropdown::placeholder{
+    color:white;
+}
+.dropdown:focus{
+    outline:none;
+}

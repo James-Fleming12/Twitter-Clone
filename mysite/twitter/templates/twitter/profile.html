@@ -23,6 +23,7 @@
             <button class = "followbutton pointer" type = "submit">Follow</button>
         {% endif %}
     </form>
+    <a href = "{% url 'lists' username=username %}" class = "listbutton">Lists</a> 
     <div class = "postbox">
         {% if post_list %}
             {% for post in post_list %}

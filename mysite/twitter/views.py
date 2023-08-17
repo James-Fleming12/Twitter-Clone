@@ -41,12 +41,15 @@ def PostView(request, pk):
     tempPost = get_object_or_404(Post, pk=pk)
     user = get_object_or_404(User2, username=request.user.username)
     liked = False; own = False; bookmarked = False 
+    userlists = user.ownlists.all(); nolists = False
     if tempPost.likedBy.filter(username=user.username).exists():
         liked = True
     if tempPost.user.username == user.username:
         own = True
     if user.bookmarks.filter(pk=tempPost.pk).exists(): 
         bookmarked = True
+    if len(userlists) == 0:
+        nolists = True
     if request.method == "POST":
         if request.POST['comment'] != "": 
             user2 = User2.objects.filter(username = request.user.username)
@@ -56,7 +59,7 @@ def PostView(request, pk):
             tempPost.commentsCount += 1
             tempPost.save()
             return redirect('post', pk = pk)
-    context = {"post": tempPost, "liked": liked, "own": own, "bookmarked": bookmarked}
+    context = {"post": tempPost, "liked": liked, "own": own, "bookmarked": bookmarked, "userlists": userlists, "nolists": nolists}
     return render(request, 'twitter/post.html', context)
 
 def CommentView(request, pk):
@@ -133,7 +136,7 @@ def CreateList(request):
         newlist.save() 
         user.ownlists.add(newlist)
         user.save() 
-    return HttpResponseRedirect(reverse('lists'))
+    return HttpResponseRedirect(reverse('lists', args=[str(request.user.username)]))
 
 def Following(request):
     user = get_object_or_404(User2, username=request.user.username)
@@ -180,10 +183,10 @@ def Bookmarks(request):
 def Lists(request, username):
     user = get_object_or_404(User2, username=request.user.username)
     listuser = get_object_or_404(User2, username=username)
-    list = listuser.ownlists.all(); owned = True; own = False
+    list = listuser.ownlists.all().order_by("name"); owned = True; own = False
     if len(list) == 0:
         owned = False 
-    savedlist = user.savedlists.all(); saved = True
+    savedlist = user.savedlists.all().order_by("name"); saved = True
     if len(savedlist) == 0:
         saved = False
     if user.username == listuser.username:
@@ -193,12 +196,43 @@ def Lists(request, username):
 
 def List(request, pk):
     list = PostList.objects.get(pk=pk)
+    own = False
+    if list.user.username == request.user.username:
+        own = True
     listlist = list.posts.all() 
-    empy = False
+    empty = False
     if len(listlist) == 0:
         empty = True
-    context = {"list": list, "empty": empty, "listlist": listlist}
+    saved = False
+    if User2.objects.get(username=request.user.username).savedlists.filter(name=list.name).exists(): 
+        saved = True
+    context = {"list": list, "empty": empty, "listlist": listlist, "own": own, "saved": saved}
     return render(request, 'twitter/list.html', context)
+
+def AddList(request, pk):
+    user = get_object_or_404(User2, username=request.user.username)
+    name = name=request.POST['list']
+    if user.ownlists.filter(name=name).exists(): 
+        list = user.ownlists.get(name=name)
+        if not (list.posts.filter(pk=pk).exists()): 
+            list.posts.add(Post.objects.get(pk=pk))
+            list.numPosts += 1
+            list.save() 
+    return HttpResponseRedirect(reverse('post', args=[int(pk)]))
+
+def DeleteList(request, pk):
+    list = PostList.objects.get(pk=pk)
+    if list.user.username == request.user.username: 
+        list.delete() 
+        return HttpResponseRedirect(reverse('lists', args=[str(request.user.username)]))
+    else: 
+        user = User2.objects.get(username=request.user.username)
+        if user.savedlists.filter(pk=list.pk).exists():
+            user.savedlists.remove(list)
+        else: 
+            user.savedlists.add(list)
+        user.save() 
+        return HttpResponseRedirect(reverse('list', args=[int(list.pk)]))
 
 def LogIn(request):
     if request.method == "POST":

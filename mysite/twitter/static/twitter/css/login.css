@@ -44,6 +44,9 @@
     border-color:white;
     margin:5px;
 }
+.logentry::placeholder{
+    color:white;
+}
 p{
     color:red; 
     font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;

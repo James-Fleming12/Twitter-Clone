@@ -1,7 +1,2 @@
 figure out how to work the comments under comments (commentUnderComment will not work for an infinite amoujnt of replys) (just give up on this one til later)
 add notifications page for new follows and new comments 
-add lists of posts (different model that people users can add posts to like bookmarks) |
-    finish ListView [view posts, button to delete list, number of saves?]
-    add a way to add posts to lists [figure out how the dropdown would work]
-    add a way to see other user's lists
-    add a way to save other user's lists

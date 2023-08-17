@@ -53,6 +53,12 @@ body{
     background-color:white;
     color:black; 
 }
+h1{
+    color:white;
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    margin-left: 20px;
+    display:inline-block;
+}
 a{
     text-decoration:none; 
     color:white; 
@@ -63,9 +69,42 @@ a:onclick{
 p{
     color:white;
     font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    display:inline-block;
+    margin-left:10px;
 }
 h2{
     color:white;
     font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif; 
     margin-left:20px;
+}
+form{
+    display:inline-block;
+    position:relative;
+    margin-left: 10px;
+    bottom:5px;
+}
+.button{
+    border: solid 1px white;
+    color:white;
+    background-color:transparent; 
+    padding:3px;
+    border-radius: 5px;
+    font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+}
+.otherbutton{
+    border: solid 1px green;
+    color:green;
+    background-color:lightgreen; 
+    padding:3px;
+    border-radius: 5px;
+    font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+}
+.delbutton{
+    border: solid 1px red;
+    color:red;
+    background-color:transparent; 
+    padding:3px;
+    border-radius: 5px;
+    font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    cursor:pointer;
 }

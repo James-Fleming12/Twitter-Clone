@@ -95,3 +95,12 @@ p{
     color:white;
     font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
 }
+.listbutton{
+    border: solid 1px white; 
+    color:white; 
+    padding: 2px; 
+    font-size:15px;
+    border-radius:5px;
+    font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif; 
+    margin-left:5px;
+}

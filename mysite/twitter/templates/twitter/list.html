@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{{list.name}}</title>
+    <title>List - {{list.name}}</title>
     {% load static %}
     <link rel = "stylesheet" href = "{% static '/twitter/css/list.css' %}">
 </head>
@@ -14,6 +14,28 @@
         </div></a>
     </div> 
     <div class = "postbox">
+        <h1>{{list.name}} - {{list.description}}</h1>
+        {% if own %}
+            <form action = "{% url 'deletelist' pk=list.pk %}" method = "POST"> 
+                {% csrf_token %}
+                <button class = "delbutton" type = "submit">
+                    Delete
+                </button>
+            </form>
+        {% else %}
+            <form action = "{% url 'deletelist' pk=list.pk %}" method = "POST"> 
+                {% csrf_token %}
+                {% if saved %}
+                    <button class="otherbutton" type = "submit">
+                        UnSave
+                    </button>
+                {% else %}
+                    <button class = "button" type = "submit">
+                        Save
+                    </button>
+                {% endif %}
+            </form>
+        {% endif %}
         {% if empty %}
             <h2>No Posts In List</h2>
         {% else %}

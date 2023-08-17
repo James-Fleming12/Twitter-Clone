@@ -21,4 +21,6 @@ urlpatterns = [
     path("lists/<str:username>", views.Lists, name="lists"),
     path("list/<int:pk>", views.List, name="list"),
     path("createlist", views.CreateList, name="createlist"),
+    path("addlist/<int:pk>", views.AddList, name="addlist"),
+    path("deletelist/<int:pk>", views.DeleteList, name="deletelist"),
 ]

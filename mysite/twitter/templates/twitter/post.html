@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>{{post.user.username}}'s Post</title>
     {% load static %}
     <link rel = "stylesheet" href = "{% static 'twitter/css/post.css' %}">
     <script src = "{% static 'twitter/js/post.js'%}"></script> 
@@ -31,9 +31,18 @@
                     {% endif %}
                 </form>
             {% endif %}
-            <form action = "{% url 'addlist' %}" method = "POST"> 
+            <form class="inline extraup" action = "{% url 'addlist' pk=post.pk %}" method = "POST"> 
                 {% csrf_token %}
-                
+                <select class = "dropdown" list = "lists" name="list" id="list" placeholder = "Add To List..." onchange="this.form.submit()">
+                    <option>Add To List</option>
+                {% if nolists %}
+                    <option value="No Lists Made">No Lists Made</option>
+                {% else %}
+                    {% for list in userlists %}
+                        <option value="{{list.name}}">{{list.name}}</option>
+                    {% endfor %}
+                {% endif %}
+                </select>
             </form>
             <br>
             <span>{{post.text}}</span> 
