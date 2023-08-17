@@ -14,7 +14,7 @@
             <h2>Create A Post</h2>
             <form action = "{% url 'createpost' %}" method = "POST">
                 {% csrf_token %}
-                <input class = "inputbox" type = "text" placeholder = "Insert Post..." name = "text" id = "text" autocomplete="off">
+                <textarea class = "inputbox" type = "text" placeholder = "Insert Post..." name = "text" id = "text" autocomplete="off"></textarea>
                 <br>
                 <button class = "inputbutton pointer" type = "submit">Submit</button> 
             </form>
@@ -36,7 +36,7 @@
                 {% for post in post_list %}
                     <div class = "post">
                         {% load static %}
-                        <img src = "{% static 'twitter/images/default.png' %}", width = 30px, height = 30px/>
+                        <img src = "{% static 'twitter/images/default.png' %}", width = 30px, height = 30px>
                         <a href = "{% url 'profile' username=post.user %}"><h2>{{post.user}}</h2></a> 
                         <p class = "poststats">Likes - {{post.likes}} | Comments - {{post.commentsCount}}</p> <br>
                         <a href = "{% url 'post' pk=post.pk%}"> 

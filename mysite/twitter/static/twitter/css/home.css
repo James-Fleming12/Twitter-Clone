@@ -21,6 +21,7 @@
     border: solid 1px white;
     background-color:transparent;
     padding:15px;
+    font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
 }
 .inputclose{
     position:absolute;
@@ -44,6 +45,9 @@
 h1{
     color:white; 
     font-family:'Courier New', Courier, monospace;
+}
+h2{
+    font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
 }
 body{
     background-color:black;
