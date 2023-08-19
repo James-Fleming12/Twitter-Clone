@@ -286,7 +286,7 @@ def SignUp(request):
                 myuser.save()
                 myuser2 = User2.objects.create(username=username, password=password)
                 myuser2.save()
-                myfollow = Follow.objects.create(username=username)
+                myfollow = FollowObj.objects.create(username=username)
                 myfollow.save()
                 return redirect(LogIn)
             else:
