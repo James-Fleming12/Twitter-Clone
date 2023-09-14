@@ -15,14 +15,16 @@
         </div></a>
     </div> 
     <h2>{{ username }}'s Profile | {{user.followers}} Follower/s | {{user.followingNum}} Following | {{user.posts}} Post/s </h2>
-    <form action="/twitter/follow/{{username}}" method = "POST"> 
-        {% csrf_token %}
-        {% if followed %}
-            <button class = "followedbutton pointer" type = "submit">Follow</button>
-        {% else %}
-            <button class = "followbutton pointer" type = "submit">Follow</button>
-        {% endif %}
-    </form>
+    {% if not own %}
+        <form action="/twitter/follow/{{username}}" method = "POST"> 
+            {% csrf_token %}
+            {% if followed %}
+                <button class = "followedbutton pointer" type = "submit">Followed</button>
+            {% else %}
+                <button class = "followbutton pointer" type = "submit">Follow</button>
+            {% endif %}
+        </form>
+    {% endif %}
     <a href = "{% url 'lists' username=username %}" class = "listbutton">Lists</a> 
     <div class = "postbox">
         {% if post_list %}

@@ -29,12 +29,14 @@ def ProfileView(request, username):
     tempUser = get_object_or_404(User2, username=username)
     currUser = get_object_or_404(User2, username=request.user.username)
     followed = False
-    tempFollow = get_object_or_404(FollowObj, username=username)
+    own = False
+    if tempUser == currUser:
+        own = True
     if currUser.following.filter(username=username).exists():
         followed = True 
     # post_list = loader(tempUser.post.objects.order_by("pub-date")[:5])
     post_list = Post.objects.filter(user = tempUser).order_by("-pub_date")
-    context = {"post_list": post_list, "username": username, "followed": followed, "user": tempUser}
+    context = {"post_list": post_list, "username": username, "followed": followed, "user": tempUser, "own": own}
     return render(request, "twitter/profile.html", context)
 
 def PostView(request, pk):
