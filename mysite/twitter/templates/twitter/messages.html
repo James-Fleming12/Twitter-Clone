@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Messages</title>
+    {% load static %}
+    <link rel = "stylesheet" href = "{% static 'twitter/css/messages.css' %}">
+</head>
+<body>
+    <p>Messages List</p>
+    {% if empty %}
+        <h1>No Messages Found</h1>
+    {% else %}
+        <h1>Messages Found</h1>
+    {% endif %}
+</body>
+</html>
