@@ -25,6 +25,15 @@ class User2(models.Model): #don't delete follows or user2s manually, because you
     def __str__(self):
         return self.username 
 
+class MessageBoard(models.Model):
+    user1= models.ForeignKey(User2, on_delete=models.PROTECT, related_name = "first")
+    user2 = models.ForeignKey(User2, on_delete=models.PROTECT, related_name = "second")
+
+class Message(models.Model):
+    text = models.CharField(max_length=500)
+    user = models.ForeignKey(User2, on_delete=models.CASCADE)
+    board = models.ForeignKey(MessageBoard, on_delete=models.CASCADE)
+
 class Post(models.Model):
     text = models.CharField(max_length=200)
     pub_date = models.DateTimeField("date published")

@@ -257,6 +257,20 @@ def DeleteList(request, pk):
         user.save() 
         return HttpResponseRedirect(reverse('list', args=[int(list.pk)]))
 
+def Messages(request):
+    user = get_object_or_404(User2, username=request.user.username)
+    dms1 = MessageBoard.objects.filter(user1=user)
+    dms2 = MessageBoard.objects.filter(user2=user)
+    if len(dms1) + len(dms2) == 0:
+        empty = True
+    else:
+        empty = False
+    context = {"dms1": dms1, "dms2": dms2, "empty": empty}
+    return render(request, 'twitter/messages.html', context)
+
+def Message(request):
+    user = get_object_or_404(User2, username=request.user.username)
+
 def LogIn(request):
     if request.method == "POST":
         # username = request.POST.get("username")
@@ -273,7 +287,6 @@ def LogIn(request):
 
 def SignUp(request):
     if request.method == "POST":
-        # username = request.POST.get("username")
         username = request.POST['username']
         password = request.POST['password1']
         password2 = request.POST['password2']

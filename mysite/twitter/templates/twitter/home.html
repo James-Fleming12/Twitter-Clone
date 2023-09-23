@@ -25,8 +25,9 @@
                 <a href = "{% url 'following' %}"> Following </a>
                 <a href = "{% url 'notifications' %}"> Notifications </a>
                 <a href = "{% url 'bookmarks' %}"> Bookmarks </a>
-                 <a href = "/twitter/lists/{{user.username}}"> Lists </a> <!-- fix these two urls so theyre not hardcoded -->
+                <a href = "/twitter/lists/{{user.username}}"> Lists </a> <!-- fix these two urls so theyre not hardcoded -->
                 <a href = "/twitter/user/{{user.username}}"> Profile </a>
+                <a href = "{% url 'messages' %}"> Messages </a>
                 <a href = "{% url 'signout' %}"> Sign Out </a>
             </div>
         </div> 
