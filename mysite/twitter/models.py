@@ -31,11 +31,8 @@ class MessageBoard(models.Model):
 
 class Message(models.Model):
     text = models.CharField(max_length=500)
-<<<<<<< HEAD
-    user = models.ForeignKey(User2, on_delete=models.CASCADE)
-=======
->>>>>>> 12fda536740ed293908f60a1802557df43eed78f
-    board = models.ForeignKey(MessageBoard, on_delete=models.CASCADE)
+    user = models.ForeignKey(User2, on_delete=models.CASCADE, related_name = "user")
+    board = models.ForeignKey(MessageBoard, on_delete=models.CASCADE, related_name = "board")
 
 class Post(models.Model):
     text = models.CharField(max_length=200)
