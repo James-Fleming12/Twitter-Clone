@@ -259,13 +259,11 @@ def DeleteList(request, pk):
 
 def Messages(request):
     user = get_object_or_404(User2, username=request.user.username)
-    dms1 = MessageBoard.objects.filter(user1=user)
-    dms2 = MessageBoard.objects.filter(user2=user)
-    if len(dms1) + len(dms2) == 0:
+    dms = MessageBoard.objects.filter(users__in=[user])
+    empty = False
+    if dms and len(dms) == 0:
         empty = True
-    else:
-        empty = False
-    context = {"dms1": dms1, "dms2": dms2, "empty": empty}
+    context = {"dms": dms, "empty": empty}
     return render(request, 'twitter/messages.html', context)
 
 def Message(request):

@@ -26,13 +26,18 @@ class User2(models.Model): #don't delete follows or user2s manually, because you
         return self.username 
 
 class MessageBoard(models.Model):
-    user1= models.ForeignKey(User2, on_delete=models.PROTECT, related_name = "first")
-    user2 = models.ForeignKey(User2, on_delete=models.PROTECT, related_name = "second")
+    users = models.ManyToManyField(User2, related_name="users")
+    name = models.CharField(max_length = 100)
+    last_messaged = models.DateTimeField("last message")
+    def __str__(self):
+        return str(self.name)
 
 class Message(models.Model):
     text = models.CharField(max_length=500)
     user = models.ForeignKey(User2, on_delete=models.CASCADE, related_name = "user")
     board = models.ForeignKey(MessageBoard, on_delete=models.CASCADE, related_name = "board")
+    def __str__(self):
+        return str(self.text)
 
 class Post(models.Model):
     text = models.CharField(max_length=200)

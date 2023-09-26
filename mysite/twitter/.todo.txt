@@ -5,7 +5,10 @@ Messages:
     - A way to block people
     - https://stackoverflow.com/questions/44684535/accessing-a-two-dimensional-array-in-django-template 
     - https://stackoverflow.com/questions/41990794/django-executing-python-code-in-html 
- 
+
+Search:
+    - For profiles
+
 OPTIONAL AT THIS POINT I WANT TO MOVE ON
     figure out how to work the comments under comments (commentUnderComment will not work for an infinite amoujnt of replys) (just give up on this one til later)
     fix notifications so theyre not spammable and so that they contain more information [links to post liked or account that followed you] 
