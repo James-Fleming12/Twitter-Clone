@@ -30,14 +30,14 @@ class MessageBoard(models.Model):
     users = models.ManyToManyField(User2, related_name="users")
     name = models.CharField(max_length = 100)
     last_messaged = models.DateTimeField("last message")
-    messages = models.ManyToManyField("Message", related_name="messages")
+    messages = models.ManyToManyField("MessageObj", related_name="messages")
     def __str__(self):
         return str(self.name)
 
-class Message(models.Model):
+class MessageObj(models.Model):
     text = models.CharField(max_length=500)
     user = models.ForeignKey(User2, on_delete=models.CASCADE, related_name = "user")
-    time = models.DateTimeField("sent", default=timezone.now())
+    time = models.DateTimeField("sent", default=timezone.now()) # says that timezone.now() doesn't work, and instead to use timezone.now()????
     def __str__(self):
         return str(self.text)
 

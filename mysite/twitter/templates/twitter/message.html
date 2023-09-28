@@ -13,9 +13,19 @@
             Home
         </div></a>
     </div>  
-    <center><h2>{{dm.name}}</h2></center>
-    <form>
-        
+    <center><h2>Message - {{dm.name}}</h2></center>
+    <form action = "{% url 'sendmessage' pk=dm.pk %}" method="POST">
+        {% csrf_token %}
+        <center>
+            <input class = "messagebox" type="text" placeholder="Message..." name="message" id="message" autocomplete="off">
+            <button type="submit" class="messagebutton pointer">Send</button>
+        </center>
     </form>
+    {% for message in messages %}
+        <div class="message"> 
+            <h3>{{message.user.username}}</h3> 
+            <span>{{message.text}}</span>
+        </div>
+    {% endfor %}
 </body>
 </html>

@@ -1,3 +1,13 @@
+.message{
+    background-color:rgb(54, 46, 108);
+    margin:8px;
+    padding:5px;
+    border-radius:3px;
+}
+.message span{
+    color:white;
+    font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+}
 p{
     color:white;
 }
@@ -8,6 +18,8 @@ h2{
     font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
 }
 h3{
+    color:white;
+    display:inline;
     font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
 }
 .navbar{
@@ -60,3 +72,17 @@ body{
 .posttext{
     font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
     overflow:auto;
+}
+.messagebox{
+    width:60%;
+    padding:10px;
+}
+.messagebutton{
+    padding:10px;
+}
+*:focus{
+    outline:none;
+}
+.pointer{
+    cursor:pointer;
+}

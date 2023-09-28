@@ -26,5 +26,6 @@ urlpatterns = [
     path("notifications", views.Notifications, name="notifications"),
     path("messages", views.Messages, name="messages"),
     path("message/<int:pk>", views.Message, name="message"),
-    path("createmessage/<str:usern>", views.CreateMessage, name="createmessage"),
+    path("createmessage/<int:pk>", views.CreateMessage, name="createmessage"),
+    path("sendmessage/<int:pk>", views.SendMessage, name="sendmessage"),
 ]

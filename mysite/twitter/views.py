@@ -234,7 +234,7 @@ def List(request, pk):
 
 def AddList(request, pk):
     user = get_object_or_404(User2, username=request.user.username)
-    name = name=request.POST['list']
+    name = request.POST['list']
     if user.ownlists.filter(name=name).exists(): 
         list = user.ownlists.get(name=name)
         if not (list.posts.filter(pk=pk).exists()): 
@@ -259,7 +259,7 @@ def DeleteList(request, pk):
 
 def Messages(request):
     user = get_object_or_404(User2, username=request.user.username)
-    dms = MessageBoard.objects.filter(users__in=[user])
+    dms = MessageBoard.objects.filter(users__in=[user]).order_by("-last_messaged")
     empty = False
     if dms and len(dms) == 0:
         empty = True
@@ -269,11 +269,20 @@ def Messages(request):
 def Message(request, pk):
     dm = MessageBoard.objects.get(pk=pk)
     user = get_object_or_404(User2, username=request.user.username)
-    messages = dm.messages.all()
+    messages = dm.messages.all().order_by("-time")
     if user in dm.users.all():
         context = {"dm": dm, "messages": messages}
         return render(request, 'twitter/message.html', context)
     return redirect('home')
+
+def SendMessage(request, pk):
+    dm = get_object_or_404(MessageBoard, pk=pk)
+    message = MessageObj.objects.create(text=request.POST['message'], user=User2.objects.get(username=request.user.username), time=timezone.now())
+    message.save()
+    dm.messages.add(message)
+    dm.last_messaged = timezone.now()
+    dm.save()
+    return redirect(Message, pk=pk)
 
 def CreateMessage(request, usern):
     user1 = get_object_or_404(User2, username=request.user.username)
