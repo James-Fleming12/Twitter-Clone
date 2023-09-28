@@ -24,8 +24,12 @@
                 <button class = "followbutton pointer" type = "submit">Follow</button>
             {% endif %}
         </form>
+        <form action="/twitter/createmessage/{{username}}" method = "POST">
+            {% csrf_token %}
+            <button class = "listbutton pointer" type="submit">Message</button>
+        </form>
     {% endif %}
-    <a href = "{% url 'lists' username=username %}" class = "listbutton">Lists</a> 
+    <a href = "{% url 'lists' username=username %}" class = "listbutton pointer">Lists</a> 
     <div class = "postbox">
         {% if post_list %}
             {% for post in post_list %}

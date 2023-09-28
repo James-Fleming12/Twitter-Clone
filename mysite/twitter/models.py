@@ -1,5 +1,6 @@
 from django.db import models
 from django.conf import settings
+from django.utils import timezone
 # Create your models here.
 
 # figure out whether youre just gonna have each user be a text option in each post or if youre gonna have each user be its own object 
@@ -29,13 +30,14 @@ class MessageBoard(models.Model):
     users = models.ManyToManyField(User2, related_name="users")
     name = models.CharField(max_length = 100)
     last_messaged = models.DateTimeField("last message")
+    messages = models.ManyToManyField("Message", related_name="messages")
     def __str__(self):
         return str(self.name)
 
 class Message(models.Model):
     text = models.CharField(max_length=500)
     user = models.ForeignKey(User2, on_delete=models.CASCADE, related_name = "user")
-    board = models.ForeignKey(MessageBoard, on_delete=models.CASCADE, related_name = "board")
+    time = models.DateTimeField("sent", default=timezone.now())
     def __str__(self):
         return str(self.text)
 
@@ -43,7 +45,7 @@ class Post(models.Model):
     text = models.CharField(max_length=200)
     pub_date = models.DateTimeField("date published")
     user = models.ForeignKey(User2, on_delete=models.PROTECT)
-    likes = models.IntegerField(default = 0) 
+    likes = models.IntegerField(default = 0)
     likedBy = models.ManyToManyField(User2, related_name="post_like")
     commentsCount = models.IntegerField(default = 0)
     def __str__(self):

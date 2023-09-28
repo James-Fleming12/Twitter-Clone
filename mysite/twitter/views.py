@@ -266,8 +266,30 @@ def Messages(request):
     context = {"dms": dms, "empty": empty}
     return render(request, 'twitter/messages.html', context)
 
-def Message(request):
+def Message(request, pk):
+    dm = MessageBoard.objects.get(pk=pk)
     user = get_object_or_404(User2, username=request.user.username)
+    messages = dm.messages.all()
+    if user in dm.users.all():
+        context = {"dm": dm, "messages": messages}
+        return render(request, 'twitter/message.html', context)
+    return redirect('home')
+
+def CreateMessage(request, usern):
+    user1 = get_object_or_404(User2, username=request.user.username)
+    user2 = get_object_or_404(User2, username=usern)
+    dmcheck = MessageBoard.objects.filter(users__in=[user1, user2])
+    valid = False
+    for i in dmcheck:
+        if user1 in i.users.all() and user2 in i.users.all():
+            valid = True
+    if valid:
+        return redirect('messages')
+    dm = MessageBoard.objects.create(name=str(user1) + " " + str(user2), last_messaged=timezone.now())
+    dm.users.add(user1)
+    dm.users.add(user2)
+    dm.save()
+    return redirect('messages')
 
 def LogIn(request):
     if request.method == "POST":

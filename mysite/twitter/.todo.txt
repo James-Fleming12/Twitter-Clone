@@ -1,10 +1,16 @@
 Messages:
     - A seperate view for both messages and messages themselves
     - A way to create a new message board with people that you follow
-    - Sending messages (your sent messages on left, recieved messages on right) 
+    - Sending messages (your sent messages on left, recieved messages on right) (or color coded)
     - A way to block people
     - https://stackoverflow.com/questions/44684535/accessing-a-two-dimensional-array-in-django-template 
     - https://stackoverflow.com/questions/41990794/django-executing-python-code-in-html 
+    - Make the message appear from the bottom instead of the top
+
+Current:
+    - Add a createmessage view
+    - Add a form to send messages to dms
+    - figure out how to run the python scripts in the html
 
 Search:
     - For profiles

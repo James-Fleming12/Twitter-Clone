@@ -25,4 +25,6 @@ urlpatterns = [
     path("deletelist/<int:pk>", views.DeleteList, name="deletelist"),
     path("notifications", views.Notifications, name="notifications"),
     path("messages", views.Messages, name="messages"),
+    path("message/<int:pk>", views.Message, name="message"),
+    path("createmessage/<str:usern>", views.CreateMessage, name="createmessage"),
 ]

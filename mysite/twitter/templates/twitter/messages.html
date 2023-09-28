@@ -8,11 +8,20 @@
     <link rel = "stylesheet" href = "{% static 'twitter/css/messages.css' %}">
 </head>
 <body>
-    <p>Messages List</p>
+    <div class = "navbar">
+        <a href = "{% url 'home' %}"><div class = "homebutton">
+            Home
+        </div></a>
+    </div> 
+    <h2>Messages List</h2>
     {% if empty %}
         <h1>No Messages Found</h1>
     {% else %}
-        <h1>Messages Found</h1>
+        {% for dm in dms %}
+        <div class = "post"> 
+            <a href = "{% url 'message' pk=dm.pk %}"><h3>{{dm.name}}</h3></a>
+        </div>
+        {% endfor %}
     {% endif %}
 </body>
 </html>
